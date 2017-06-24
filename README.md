@@ -4,10 +4,10 @@
 
 ## Team
 
-  - teamMember
-  - teamMember
-  - teamMember
-  - teamMember
+  - Gunpreet Singh
+  - Jake Gober
+  - Karel Luwena
+  - Nick Akey
 
 ## Table of Contents
 
@@ -21,15 +21,23 @@
 
 ## Usage
 
-> Some usage instructions
+Please vist : <Add Heroku Deployment Link>
 
 ## Requirements
 
-- Node 6.4.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- Axios: ^0.16.2,
+- Bluebird: ^3.5.0,
+- Body-Parser: ^1.17.2,
+- Bootstrap: ^3.3.7,
+- Express: ^4.15.0,
+- Jquery: ^3.1.1,
+- Mysql: ^2.13.0,
+- React: ^15.4.2,
+- React-Dom: ^15.4.2,
+- React-Strap: 0.0.1,
+- Request: ^2.81.0,
+- Request-Promises: ^1.1.0
+
 
 ## Development
 
@@ -38,14 +46,12 @@
 From within the root directory:
 
 ```sh
-npm install -g bower
 npm install
-bower install
 ```
 
 ### Roadmap
 
-View the project roadmap [here](LINK_TO_DOC)
+View the project roadmap [here](https://docs.google.com/spreadsheets/d/13eEg5jqT_UfavkErTw-1w1Tnzm71sZkC5FDcFFY39wY/edit#gid=0)
 
 
 ## Contributing
