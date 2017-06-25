@@ -41,8 +41,8 @@ class Search extends React.Component {
       <div>
         <form>
           Input Your Food:
-         
-          <input type="submit" value="Submit" onClick={this.handleClick.bind(this)}/>
+          <input id="input" type="text" name="food_item" onChange={this.handleChange.bind(this)}/>
+          <input id="submit" type="submit" value="Submit" onClick={this.handleClick.bind(this)}/>
         </form>
           {this.state.matchingFoodItems.map(item => <MatchingItem item={item}/>)}
       </div>
@@ -50,6 +50,6 @@ class Search extends React.Component {
   }
 }
 
-// <input id="input" type="text" name="food_item" onChange={this.handleChange.bind(this)}/>
+
 
 export default Search;
