@@ -12,7 +12,11 @@ class App extends React.Component {
     this.state = {
       //the below represents the food items that the user has selected
       //to see it in action, paste in 'pizza - 450 calories', 'ice cream - 800 calories'
-      selectedFoodItems: []
+      selectedFoodItems: [],
+
+      //total calories represents the sum of all calories in selected food items
+      //to see in action, set it to a random number
+      totalCalories: null
     }
   }
 
@@ -34,7 +38,7 @@ class App extends React.Component {
     return (<div>
       <Search />
       <Items selectedFoodItems={this.state.selectedFoodItems}/>
-      <Calories />
+      <Calories totalCalories = {this.state.totalCalories}/>
     </div>)
   }
 }
