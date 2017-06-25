@@ -17,6 +17,7 @@ class Search extends React.Component {
   }
 
   handleChange(e){
+    console.log('handle change is firing')
     this.setState({userFoodItemInput: e.target.value})
   }
 
@@ -40,7 +41,7 @@ class Search extends React.Component {
       <div>
         <form>
           Input Your Food:
-          <input type="text" name="food_item" onChange={this.handleChange.bind(this)}/>
+         
           <input type="submit" value="Submit" onClick={this.handleClick.bind(this)}/>
         </form>
           {this.state.matchingFoodItems.map(item => <MatchingItem item={item}/>)}
@@ -48,5 +49,7 @@ class Search extends React.Component {
     )
   }
 }
+
+// <input id="input" type="text" name="food_item" onChange={this.handleChange.bind(this)}/>
 
 export default Search;

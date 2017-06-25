@@ -5,15 +5,21 @@
   "main": "index.js",
   "scripts": {
     "react-dev": "webpack -d --watch",
-    "server-dev": "nodemon server/index.js"
+    "server-dev": "nodemon server/index.js",
+    "test": "jest"
   },
   "author": "Gunpreet, Jake, Karel, and Nick",
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.23.1",
+    "babel-jest": "^20.0.3",
     "babel-loader": "^6.3.2",
-    "babel-preset-es2015": "^6.22.0",
-    "babel-preset-react": "^6.23.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^2.9.1",
+    "jest": "^20.0.4",
+    "react-addons-test-utils": "^15.6.0",
+    "react-test-renderer": "^15.6.1",
     "webpack": "^2.2.1"
   },
   "dependencies": {
