@@ -2,7 +2,7 @@ import React from 'react';
 
 const MatchingItem = (props) => (
   <div>
-    <h5> {props.item} </h5>
+    <p> {props.item} </p>
   </div>
 )
 

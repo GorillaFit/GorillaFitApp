@@ -10,7 +10,9 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: []
+      //the below represents the food items that the user has selected
+      //to see it in action, paste in 'pizza - 450 calories', 'ice cream - 800 calories'
+      selectedFoodItems: []
     }
   }
 
@@ -31,7 +33,7 @@ class App extends React.Component {
   render() {
     return (<div>
       <Search />
-      <Items />
+      <Items selectedFoodItems={this.state.selectedFoodItems}/>
       <Calories />
     </div>)
   }
