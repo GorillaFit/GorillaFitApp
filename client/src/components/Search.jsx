@@ -1,5 +1,6 @@
 import React from 'react';
 import MatchingItem from './MatchingItem.jsx';
+import axios from 'axios';
 
 class Search extends React.Component {
   constructor(props) {
@@ -14,13 +15,33 @@ class Search extends React.Component {
       //Such as 'apple - 100 calories', 'cheese - 230 calories'
     }
   }
+
+  handleChange(e){
+    this.setState({userFoodItemInput: e.target.value})
+  }
+
+  handleClick(e){
+    e.preventDefault();
+    axios.get('/food', {
+      params: {
+        userFood: this.state.userFoodItemInput
+      }
+    })
+    .then((res) => {
+      //do something with the data 
+    })
+    .catch((err) => {
+      //do something with the error
+    })
+  }
+
   render() {
     return (
       <div>
         <form>
           Input Your Food:
-          <input type="text" name="food_item" />
-          <input type="submit" value="Submit" />
+          <input type="text" name="food_item" onChange={this.handleChange.bind(this)}/>
+          <input type="submit" value="Submit" onClick={this.handleClick.bind(this)}/>
         </form>
           {this.state.matchingFoodItems.map(item => <MatchingItem item={item}/>)}
       </div>
