@@ -19,9 +19,13 @@ coverage
 .grunt
 
 
+
 # Dependency directorys
 # Deployed apps should consider commenting these lines out:
 # see https://npmjs.org/doc/faq.html#Should-I-check-my-node_modules-folder-into-git
+*~
+bundle.js
+bundle.min.js
 node_modules/
 bower_components/
 client/dist/bundle.js
