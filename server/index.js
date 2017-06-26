@@ -1,12 +1,12 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var request = require('request')
+var request = require('request');
 
 var app = express();
 
 
 app.use(express.static(__dirname + '/../client/dist'));
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 /// DEPRECATED
 
@@ -32,15 +32,15 @@ app.get('/foods', function (req, res) {
   //res.send('this is data from the server')
   //res.status(200)
   //********************TestCode*************************//
-  console.log(req.query.userFood)
+  console.log(req.query.userFood);
 
-  var options = { 
+  var options = {
     method: 'POST',
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
-    headers: { 
+    headers: {
       'content-type': 'application/json',
       'x-app-key': '599e301928d15020ff16d7dbeef77f6f',
-      'x-app-id': '9e058c76' 
+      'x-app-id': '9e058c76'
     },
     sort: {
       order: '_score'
@@ -48,27 +48,27 @@ app.get('/foods', function (req, res) {
     //offset: 0,
     limit: 5,
 
-    body: { 
+    body: {
       query: req.query.userFood,
-      timezone: 'US/Eastern' 
-     },
-     json: true 
-   };
+      timezone: 'US/Eastern'
+    },
+    json: true
+  };
 
   request(options, function (error, response, body) {
     if (error) {
-      console.log('here in error')
-	  throw new Error(error);
-	} else {
-	  res.status(200)
-	  console.log(body.foods)
-	  res.send(body.foods)
-	  res.end();
-	  
-	}
-	
-    });
+      console.log('here in error');
+      throw new Error(error);
+    } else {
+      res.status(200);
+      console.log(body.foods);
+      res.send(body.foods);
+      res.end();
+
+    }
+
   });
+});
 
 
 app.listen(3000, function () {

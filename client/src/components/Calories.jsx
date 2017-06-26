@@ -5,6 +5,6 @@ const Calories = (props) => (
     <h4> Total Calories </h4>
     <p>{props.totalCalories}</p>
   </div>
-)
+);
 
 export default Calories;

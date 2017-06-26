@@ -17,7 +17,7 @@ class App extends React.Component {
         breakfast: [],
         lunch: [],
         dinner: [],
-        snack:[]
+        snack: []
       },
       //the below represents the food items that the user has selected
       //to see it in action, paste in 'pizza - 450 calories', 'ice cream - 800 calories'
@@ -26,14 +26,14 @@ class App extends React.Component {
       //total calories represents the sum of all calories in selected food items
       //to see in action, set it to a random number
       totalCalories: 0,
-      fat:0,
-      carbs:0,
-      protein:0
-    }
+      fat: 0,
+      carbs: 0,
+      protein: 0
+    };
     this.addFood = this.addFood.bind(this);
   }
 
-  addFood (meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+  addFood(meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
     var tempItems = this.state.items;
     for (var key in tempItems) {
       if (key === meal) {
@@ -41,17 +41,17 @@ class App extends React.Component {
       }
     }
     var newTotalCalories = this.state.totalCalories + caloriesToAdd;
-    var newFat = this.state.fat + fatToAdd;
-    var newCarbs = this.state.carbs + carbsToAdd;
-    var newProtein = this.state.protein + proteinToAdd;
+    var newFat = this.state.fat + Math.floor(fatToAdd);
+    var newCarbs = this.state.carbs + Math.floor(carbsToAdd);
+    var newProtein = this.state.protein + Math.floor(proteinToAdd);
     this.setState({
       items: tempItems,
-      totalCalories:newTotalCalories,
+      totalCalories: newTotalCalories,
       fat: newFat,
       carbs: newCarbs,
       protein: newProtein
     });
-    console.log(this.state.items)
+    console.log(this.state.items);
   }
 
   // componentDidMount() {
@@ -72,18 +72,13 @@ class App extends React.Component {
 
   render() {
     return (<div>
-      <Search addFood={this.addFood}/>
-      <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack}/>
-      <Calories totalCalories = {this.state.totalCalories}/>
-      <Nutrients  fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein}/>
-    </div>)
+      <Search addFood={this.addFood} />
+      <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
+      <Calories totalCalories={this.state.totalCalories} />
+      <Nutrients fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein} />
+    </div >);
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
-
-//this index will have 3 components 
-//search 
-//items
-//calories
