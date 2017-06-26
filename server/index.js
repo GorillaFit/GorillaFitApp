@@ -11,10 +11,21 @@ app.get('/items', function (req, res) {
     if (err) {
       res.sendStatus(500);
     } else {
-      res.json(data);
+      res.send(data);
     }
   });
 });
+
+
+// handle incoming get requests from the client and then
+//app.get()
+  // get request to the api and them
+  //app.get()
+    // send data back to the client
+    //res.send()
+
+
+
 
 app.listen(3000, function () {
   console.log('listening on port 3000!');
