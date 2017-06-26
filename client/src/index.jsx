@@ -41,9 +41,9 @@ class App extends React.Component {
       }
     }
     var newTotalCalories = this.state.totalCalories + caloriesToAdd;
-    var newFat = this.state.fat + fatToAdd;
-    var newCarbs = this.state.carbs + carbsToAdd;
-    var newProtein = this.state.protein + proteinToAdd;
+    var newFat = this.state.fat + Math.floor(fatToAdd);
+    var newCarbs = this.state.carbs + Math.floor(carbsToAdd);
+    var newProtein = this.state.protein + Math.floor(proteinToAdd);
     this.setState({
       items: tempItems,
       totalCalories: newTotalCalories,

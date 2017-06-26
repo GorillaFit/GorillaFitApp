@@ -42,6 +42,11 @@ class Search extends React.Component {
         this.setState({ matchingFoodItems: tempMatchingFoods });
         console.log(this.state.matchingFoodItems[0][0]);
       })
+      .then(() => {
+        this.setState({
+          userFoodItemInput: ''
+        });
+      })
       .catch((err) => {
         console.log(err);
       });
