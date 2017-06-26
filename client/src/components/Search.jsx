@@ -1,7 +1,7 @@
 import React from 'react';
 import MatchingItem from './MatchingItem.jsx';
 import axios from 'axios';
-
+        
 class Search extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +35,7 @@ class Search extends React.Component {
       //do something with the error
     })
   }
-
+  
   render() {
     return (
       <div>
@@ -49,7 +49,4 @@ class Search extends React.Component {
     )
   }
 }
-
-
-
 export default Search;
