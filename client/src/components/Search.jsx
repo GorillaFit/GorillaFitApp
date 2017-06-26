@@ -32,23 +32,6 @@ class Search extends React.Component {
     //console.log(this.state.userFoodItemInput)
     e.preventDefault();
     axios.get('/foods', {
-      userFoodItemInput: null,
-      //matchingFoodItems represents the matches that our
-      //API serves up in response to being given userFoodItemInput
-      matchingFoodItems: []
-      //to see how it works, add a few string elements to matching food items.
-      //Such as 'apple - 100 calories', 'cheese - 230 calories'
-    }
-  }
-
-  handleChange(e){
-    console.log('handle change is firing')
-    this.setState({userFoodItemInput: e.target.value})
-  }
-
-  handleClick(e){
-    e.preventDefault();
-    axios.get('/food', {
       params: {
         userFood: this.state.userFoodItemInput
       }
@@ -68,7 +51,7 @@ class Search extends React.Component {
       console.log(err);
     });
   }
-  
+
   render() {
     return (
       <div>
