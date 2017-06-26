@@ -71,6 +71,7 @@ app.get('/foods', function (req, res) {
 });
 
 
-app.listen(3000, function () {
-  console.log('listening on port 3000!');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function () {
+  console.log(`listening on port ${PORT}!`);
 });
