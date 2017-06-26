@@ -13,12 +13,13 @@ describe('Search Component', () => {
     setTimeout(()=>{expect(wrapper.state().userFoodItemInput).toBe('chicken')}, 200)
   })
 
-  it('On user submit, should call handleClick function', ()=>{
+  it('On user click of the submit button, and axios get request should fire', ()=>{
     sinon.spy(axios, "get");
     const wrapper = shallow(<Search />);
     wrapper.find('#submit').simulate('click', {preventDefault: ()=>{return null}});
     expect(axios.get.calledOnce).toBe(true)
   })
+  
 });
 
   
