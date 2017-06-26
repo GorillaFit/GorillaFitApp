@@ -6,13 +6,19 @@ import Search from './components/Search.jsx';
 import Items from './components/Items.jsx';
 import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
+import update from 'immutability-helper';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: [],
+      items: {
+        breakfast: [],
+        lunch: [],
+        dinner: [],
+        snack:[]
+      },
       //the below represents the food items that the user has selected
       //to see it in action, paste in 'pizza - 450 calories', 'ice cream - 800 calories'
       selectedFoodItems: [],
@@ -27,9 +33,13 @@ class App extends React.Component {
     this.addFood = this.addFood.bind(this);
   }
 
-  addFood (foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
-    var tempItems = this.state.items.slice();
-    tempItems.push(foodToAdd);
+  addFood (meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+    var tempItems = this.state.items;
+    for (var key in tempItems) {
+      if (key === meal) {
+        tempItems[key].push(foodToAdd);
+      }
+    }
     var newTotalCalories = this.state.totalCalories + caloriesToAdd;
     var newFat = this.state.fat + fatToAdd;
     var newCarbs = this.state.carbs + carbsToAdd;
@@ -41,6 +51,7 @@ class App extends React.Component {
       carbs: newCarbs,
       protein: newProtein
     });
+    console.log(this.state.items)
   }
 
   // componentDidMount() {
@@ -62,7 +73,7 @@ class App extends React.Component {
   render() {
     return (<div>
       <Search addFood={this.addFood}/>
-      <Items selectedFoodItems={this.state.items}/>
+      <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack}/>
       <Calories totalCalories = {this.state.totalCalories}/>
       <Nutrients  fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein}/>
     </div>)

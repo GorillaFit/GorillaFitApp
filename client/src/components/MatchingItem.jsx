@@ -11,8 +11,8 @@ class MatchingItem extends React.Component {
 
 
   addFood () {
-  	console.log(this)
-  	this.props.addFood(this.props.item[0].food_name, this.props.item[0].nf_calories,this.props.item[0].nf_total_fat, this.props.item[0].nf_total_carbohydrate,this.props.item[0].nf_protein );
+  	console.log('this is this.props.meal', this.props.item)
+  	this.props.addFood(this.props.meal, this.props.item[0].food_name, this.props.item[0].nf_calories,this.props.item[0].nf_total_fat, this.props.item[0].nf_total_carbohydrate,this.props.item[0].nf_protein );
     this.setState({listClear: true})
     //this.render()
   }
