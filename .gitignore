@@ -26,6 +26,7 @@ coverage
 *~
 bundle.js
 bundle.min.js
+dist/bundle.js
 node_modules/
 bower_components/
 client/dist/bundle.js
