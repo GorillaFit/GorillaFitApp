@@ -38,6 +38,7 @@
     "react-dom": "^15.4.2",
     "react-strap": "0.0.1",
     "request": "^2.81.0",
-    "request-promises": "^1.1.0"
+    "request-promises": "^1.1.0",
+    "webpack": "^2.2.1"
   }
 }
