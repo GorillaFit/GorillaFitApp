@@ -32,26 +32,43 @@ class Search extends React.Component {
     //console.log(this.state.userFoodItemInput)
     e.preventDefault();
     axios.get('/foods', {
+      userFoodItemInput: null,
+      //matchingFoodItems represents the matches that our
+      //API serves up in response to being given userFoodItemInput
+      matchingFoodItems: []
+      //to see how it works, add a few string elements to matching food items.
+      //Such as 'apple - 100 calories', 'cheese - 230 calories'
+    }
+  }
+
+  handleChange(e){
+    console.log('handle change is firing')
+    this.setState({userFoodItemInput: e.target.value})
+  }
+
+  handleClick(e){
+    e.preventDefault();
+    axios.get('/food', {
       params: {
         userFood: this.state.userFoodItemInput
       }
     })
-      .then((res) => {
-        var tempMatchingFoods = this.state.matchingFoodItems.slice();
-        tempMatchingFoods.push(res.data);
-        this.setState({ matchingFoodItems: tempMatchingFoods });
-        console.log(this.state.matchingFoodItems[0][0]);
-      })
-      .then(() => {
-        this.setState({
-          userFoodItemInput: ''
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+    .then((res) => {
+      var tempMatchingFoods = this.state.matchingFoodItems.slice();
+      tempMatchingFoods.push(res.data);
+      this.setState({ matchingFoodItems: tempMatchingFoods });
+      console.log(this.state.matchingFoodItems[0][0]);
+    })
+    .then(() => {
+      this.setState({
+        userFoodItemInput: ''
       });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
-
+  
   render() {
     return (
       <div>
@@ -77,6 +94,3 @@ class Search extends React.Component {
 
 
 export default Search;
-
-
-// this.state.matchingFoodItems

@@ -32,6 +32,3 @@ class MatchingItem extends React.Component {
 
 
 export default MatchingItem;
-
-
-// <h5>{this.state.listClear &&  '\'' + this.props.item[0].food_name + '\'' + ' was added to your daily food list!'}</h5>
