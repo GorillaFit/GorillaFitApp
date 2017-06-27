@@ -32,10 +32,12 @@
     "express": "^4.15.0",
     "immutability-helper": "^2.2.2",
     "jquery": "^3.1.1",
+    "material-ui": "^0.18.4",
     "mysql": "^2.13.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-strap": "0.0.1",
+    "react-tap-event-plugin": "^2.0.1",
     "request": "^2.81.0",
     "request-promises": "^1.1.0"
   }
