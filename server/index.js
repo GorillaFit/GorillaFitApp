@@ -22,6 +22,13 @@ app.use(bodyParser.json());
 
 // });
 
+app.post('/login', (req, res)=>{
+  console.log('this is the request ', req.body);
+
+
+
+})
+
 
 
 app.get('/foods', function (req, res) {

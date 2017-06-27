@@ -4,6 +4,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import axios from 'axios';
 injectTapEventPlugin();
 
 class SignUp extends React.Component {
@@ -39,8 +40,18 @@ class SignUp extends React.Component {
   }
 
   handleSubmit(e){
-    console.log('this is the state ', this.state)
-    this.setState({open: false})
+    e.preventDefault();
+    axios.post('/login', {
+      userName: this.state.userName,
+      password: this.state.password
+    })
+    .then((res)=>{
+      console.log('this request has been a success!');
+      this.setState({open: false})
+    })
+    .catch((err)=>{
+      console.log('this request has been a FAIL! ', err);
+    })
   }
 
   render() {
