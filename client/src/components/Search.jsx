@@ -20,7 +20,7 @@ class Search extends React.Component {
   }
 
   handleChange(e){
-    console.log('handle change is firing')
+    //console.log('handle change is firing')
     this.setState({userFoodItemInput: e.target.value})
     //console.log(this.state.userFoodItemInput)
   }
@@ -30,14 +30,14 @@ class Search extends React.Component {
   }
 
   dropdownChange (e) {
-    console.log('this is the val', e.target.value)
+    //console.log('this is the val', e.target.value)
     this.setState({meal:e.target.value})
   }
 
   handleClick(e){
     //console.log(this.state.userFoodItemInput)
     e.preventDefault();
-    axios.get('/foods', {
+    axios.get('/test', {
       params: {
         userFood: this.state.userFoodItemInput
       }
@@ -45,8 +45,12 @@ class Search extends React.Component {
     .then((res) => {
       var tempMatchingFoods = this.state.matchingFoodItems.slice();
       tempMatchingFoods.push(res.data)
+      console.log(tempMatchingFoods)
       this.setState({matchingFoodItems: tempMatchingFoods})
-      console.log(this.state.matchingFoodItems[0][0])
+      
+    })
+    .then(res => {
+      console.log(this.state.matchingFoodItems)
     })
     .catch((err) => {
       console.log(err)
@@ -68,7 +72,7 @@ class Search extends React.Component {
             <option value='dinner'>Dinner</option>
           </select>
         </form>
-           {this.state.matchingFoodItems.map(item => <MatchingItem meal={this.state.meal} addFood={this.props.addFood} clearMatchList= {this.clearFoods} item={item}/>)} 
+           {this.state.matchingFoodItems.slice(0,5).map((item, i) => <MatchingItem meal={this.state.meal} addFood={this.props.addFood} clearMatchList= {this.clearFoods} item={item} key={i}/>)} 
           <br/>
       </div>
 

@@ -22,7 +22,7 @@ class MatchingItem extends React.Component {
   	return (
 	  	<div>
 
-	    <h5 > {!this.state.listClear && (this.props.item[0].food_name + ' (' + this.props.item[0].nf_calories + ' cals)')} </h5>
+	    <h5 > 1 </h5>
 	    {!this.state.listClear && <button onClick={this.addFood}> Add! </button>}
 	  </div>
     )
