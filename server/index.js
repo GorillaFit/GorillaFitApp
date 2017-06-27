@@ -49,7 +49,7 @@ app.get('/test', function(req, res) {
     var commonFoods = JSON.parse(body).common.slice(0,5)
     var branded = JSON.parse(body).branded.slice(0,5)
     var foodMatches = commonFoods.concat(branded)
-    console.log(foodMatches)
+    //console.log(foodMatches)
     res.send(foodMatches);
     res.status(200);
     res.end();
@@ -61,7 +61,7 @@ app.get('/test', function(req, res) {
 
 
 app.get('/foods', function (req, res) {
-  //console.log(req.query.userFood)
+  console.log('reqquery is' , req.query)
   var options = { 
     method: 'POST',
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
@@ -70,14 +70,9 @@ app.get('/foods', function (req, res) {
       'x-app-key': xAppKey,
       'x-app-id': xAppId 
     },
-    sort: {
-      order: '_score'
-    },
-    //offset: 0,
-    limit: 5,
 
     body: { 
-      query: req.query.userFood,
+      query: req.query.addedFood,
       timezone: 'US/Eastern' 
      },
      json: true 
@@ -89,7 +84,7 @@ app.get('/foods', function (req, res) {
 	  throw new Error(error);
 	} else {
 	  res.status(200)
-	  console.log(body.foods)
+	  console.log('this is the body',body)
 	  res.send(body.foods)
 	  res.end();
 	  
