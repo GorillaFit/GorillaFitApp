@@ -9,8 +9,6 @@ import Nutrients from './components/Nutrients.jsx';
 import SignUp from './components/SignUp.jsx';
 import update from 'immutability-helper';
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);

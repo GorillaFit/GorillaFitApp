@@ -36,22 +36,21 @@ class Search extends React.Component {
         userFood: this.state.userFoodItemInput
       }
     })
-      .then((res) => {
-        var tempMatchingFoods = this.state.matchingFoodItems.slice();
-        tempMatchingFoods.push(res.data);
-        this.setState({ matchingFoodItems: tempMatchingFoods });
-        console.log(this.state.matchingFoodItems[0][0]);
-      })
-      .then(() => {
-        this.setState({
-          userFoodItemInput: ''
-        });
-      })
-      .catch((err) => {
-        console.log(err);
+    .then((res) => {
+      var tempMatchingFoods = this.state.matchingFoodItems.slice();
+      tempMatchingFoods.push(res.data);
+      this.setState({ matchingFoodItems: tempMatchingFoods });
+      console.log(this.state.matchingFoodItems[0][0]);
+    })
+    .then(() => {
+      this.setState({
+        userFoodItemInput: ''
       });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
   }
-
   render() {
     return (
       <div>
@@ -78,5 +77,3 @@ class Search extends React.Component {
 
 export default Search;
 
-
-// this.state.matchingFoodItems

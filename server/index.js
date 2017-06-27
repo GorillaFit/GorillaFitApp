@@ -32,6 +32,7 @@ app.post('/signup', (req, res)=>{
   })
 })
 
+
 app.get('/foods', function (req, res) {
   var options = {
     method: 'POST',
@@ -46,7 +47,6 @@ app.get('/foods', function (req, res) {
     },
     //offset: 0,
     limit: 5,
-
     body: {
       query: req.query.userFood,
       timezone: 'US/Eastern'
@@ -63,13 +63,12 @@ app.get('/foods', function (req, res) {
       console.log(body.foods);
       res.send(body.foods);
       res.end();
-
     }
 
   });
 });
 
-
-app.listen(3000, function () {
-  console.log('listening on port 3000!');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, function () {
+  console.log(`listening on port ${PORT}!`);
 });

@@ -7,7 +7,9 @@
     "postinstall": "curl -s https://raw.githubusercontent.com/reactorcore/pomander/master/bin/install | bash",
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
-    "test": "jest"
+    "test": "jest",
+    "build": "webpack -p",
+    "heroku-postbuild" : "npm run build"
   },
   "author": "Gunpreet, Jake, Karel, and Nick",
   "license": "MIT",
