@@ -11,10 +11,11 @@ class SignUp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: false,
+      signUpOpen: false,
+      logInOpen: false,
       userName: null,
       password: null,
-      actions: [
+      signUpActions: [
         <TextField
           floatingLabelText="Username"
           onChange = {(event, newValue)=>
@@ -31,12 +32,35 @@ class SignUp extends React.Component {
         label="Submit"
         onTouchTap={this.handleSubmit.bind(this)}
         />
-      ]
+      ], 
+      logInActions: [
+        <TextField
+          floatingLabelText="Username"
+          onChange = {(event, newValue)=>
+            this.setState({userName: newValue})}
+        />,
+        <TextField
+          type="password"
+          ref="password"
+          floatingLabelText="Password"
+          onChange = {(event, newValue)=>
+            this.setState({password: newValue})}
+        />,
+        <RaisedButton
+        label="Log-in"
+        onTouchTap={this.handleSubmit.bind(this)}
+        />
+      ], 
+
     };
   }
 
-  handleOpen(){
-    this.setState({open: true})
+  handleSignUpOpen(){
+    this.setState({signUpOpen: true})
+  }
+
+  handleLogInOpen(){
+    this.setState({logInOpen: true})
   }
 
   handleSubmit(e){
@@ -47,7 +71,8 @@ class SignUp extends React.Component {
     })
     .then((res)=>{
       console.log('this request has been a success!');
-      this.setState({open: false})
+      this.setState({signUpOpen: false})
+      this.setState({logInOpen: true})
     })
     .catch((err)=>{
       console.log('this request has been a FAIL! ', err);
@@ -58,11 +83,16 @@ class SignUp extends React.Component {
     return (
       <MuiThemeProvider>
          <div>
-            <RaisedButton label="Sign Up" onTouchTap={this.handleOpen.bind(this)}/>
+            <RaisedButton primary={true} label="Sign Up" onTouchTap={this.handleSignUpOpen.bind(this)}/> <RaisedButton label="Log-in" onTouchTap={this.handleLogInOpen.bind(this)}/>
             <Dialog 
               title="Sign up for an account" 
-              open={this.state.open}
-              actions={this.state.actions}
+              open={this.state.signUpOpen}
+              actions={this.state.signUpActions}
+            />
+            <Dialog 
+              title="Log into your account!" 
+              open={this.state.logInOpen}
+              actions={this.state.logInActions}
             />
          </div>
       </MuiThemeProvider>
