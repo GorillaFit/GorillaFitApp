@@ -30,7 +30,7 @@ class SignUp extends React.Component {
         />,
         <RaisedButton
         label="Submit"
-        onTouchTap={this.handleSignUpeSubmit.bind(this)}
+        onTouchTap={this.handleSignUpSubmit.bind(this)}
         />
       ], 
       logInActions: [

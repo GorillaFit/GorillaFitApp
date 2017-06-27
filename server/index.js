@@ -3,13 +3,17 @@ var bodyParser = require('body-parser');
 var request = require('request');
 var authUtils = require('./authUtils.js');
 const Promise = require('bluebird');
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 Promise.promisifyAll(bcrypt);
 Promise.promisifyAll(authUtils);
+const passport = require('passport');
+const LocalStrategy = require('passport-local').Strategy;
 
 var app = express();
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.post('/signup', (req, res)=>{
   authUtils.isNewUserAsync(req.body.userName)
@@ -31,6 +35,34 @@ app.post('/signup', (req, res)=>{
     res.end()
   })
 })
+
+
+passport.use(new LocalStrategy(
+  function(username, plainTextPassword, done) {
+    console.log('this local thing is being called! ')
+    module.exports.isExistingUserAsync(username)
+    .then((user)=>{
+      return bcrypt.compareAsync(plainTextPassword, user.hash);
+    })
+    .then(()=>{
+      return bcrypt.getNutritionHistoryAsync(username);
+    })
+    .then((history)=>{
+      console.log('we are inside history!!!')
+      return done(null, history);
+    })
+    .catch((err)=>{
+      console.log('this is an error! ', err);
+      return done(null, false, {message: 'this is an error'});
+    })
+  })
+)
+
+app.post('/login', passport.authenticate('local', 
+  {successRedirect: '/success', failureRedirect: '/fail'},
+  (req, res)=>{
+    console.log('this is what req and res look like ', req, res)
+}));
 
 app.get('/foods', function (req, res) {
   var options = {

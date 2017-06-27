@@ -9,7 +9,7 @@
     "server-dev": "nodemon server/index.js",
     "test": "jest",
     "build": "webpack -p",
-    "heroku-postbuild" : "npm run build"
+    "heroku-postbuild": "npm run build"
   },
   "author": "Gunpreet, Jake, Karel, and Nick",
   "license": "MIT",
@@ -38,6 +38,7 @@
     "material-ui": "^0.18.4",
     "mysql": "^2.13.0",
     "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-strap": "0.0.1",
