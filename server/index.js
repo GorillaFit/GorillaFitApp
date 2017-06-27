@@ -32,7 +32,6 @@ app.post('/signup', (req, res)=>{
   })
 })
 
-
 app.get('/foods', function (req, res) {
   var options = {
     method: 'POST',

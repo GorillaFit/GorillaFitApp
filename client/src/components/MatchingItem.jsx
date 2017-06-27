@@ -29,6 +29,4 @@ class MatchingItem extends React.Component {
 
 }
 
-
-
 export default MatchingItem;
