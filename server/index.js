@@ -32,10 +32,7 @@ app.get('/foods', function (req, res) {
   //res.send('this is data from the server')
   //res.status(200)
   //********************TestCode*************************//
-  //res.send('this is data from the server')
-  //res.status(200)
-  // console.log(req.query.userFood);
-  //********************TestCode*************************//
+  console.log(req.query.userFood);
 
   var options = {
     method: 'POST',
@@ -65,7 +62,6 @@ app.get('/foods', function (req, res) {
     } else {
       res.status(200);
       console.log(body.foods);
-      // console.log(body.foods);
       res.send(body.foods);
       res.end();
 
@@ -74,36 +70,7 @@ app.get('/foods', function (req, res) {
   });
 });
 
-/*get request for exercise*/
-app.get('/exercise', function(req, res) {
-  var options = {
-    method: 'POST',
-    url: 'https://trackapi.nutritionix.com/v2/natural/exercise',
-    headers: {
-      'content-type': 'application/json',
-      'x-app-key': '599e301928d15020ff16d7dbeef77f6f',
-      'x-app-id': '9e058c76'
-    },
-    body: {
-      query: req.query.userExercise,
-    },
-    json: true
-  };
 
-  request(options, function (error, response, body) {
-    if (error) {
-      console.log('an error was thrown in fetching exercise from API');
-    } else {
-      console.log(body);
-      res.send(body);
-    }
-  });
-
-  // res.send('<>hello from server/index.js<>');
-});
-
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, function () {
-  console.log(`listening on port ${PORT}!`);
+app.listen(3000, function () {
+  console.log('listening on port 3000!');
 });
