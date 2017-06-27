@@ -8,6 +8,11 @@ import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
 import update from 'immutability-helper';
 
+/*Exercise Components*/
+import SearchExercise from './components/SearchExercise.jsx';
+import Exercises from './components/Exercises.jsx';
+import CalorieOutput from './components/CalorieOutput.jsx';
+
 
 class App extends React.Component {
   constructor(props) {
@@ -28,7 +33,14 @@ class App extends React.Component {
       totalCalories: 0,
       fat: 0,
       carbs: 0,
-      protein: 0
+      protein: 0,
+      /*Below are dummy data for exercises and calorie output*/
+      exercises: [
+        'rowing',
+        'fencing'
+      ],
+      calorieOutput: 560
+
     };
     this.addFood = this.addFood.bind(this);
   }
@@ -54,6 +66,17 @@ class App extends React.Component {
     console.log(this.state.items);
   }
 
+  /* handlefunction for adding exercise */
+  addExercise(result) {
+    var tempArray = this.state.exercises.slice();
+    tempArray.push(result.exercises[0].name);
+
+    this.setState({
+      exercises: tempArray,
+      calorieOutput: this.state.calorieOutput + result.exercises[0].nf_calories
+    });
+  }
+
   // componentDidMount() {
   //   $.ajax({
   //     url: '/items',
@@ -76,6 +99,10 @@ class App extends React.Component {
       <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
       <Calories totalCalories={this.state.totalCalories} />
       <Nutrients fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein} />
+      <hr />
+      <SearchExercise addExercise={this.addExercise.bind(this)} />
+      <Exercises exercises={this.state.exercises} />
+      <CalorieOutput calorieOutput={this.state.calorieOutput} />
     </div >);
   }
 }
