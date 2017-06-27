@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
+var authUtils = require('./authUtils.js');
 
 var app = express();
 
@@ -22,8 +23,9 @@ app.use(bodyParser.json());
 
 // });
 
-app.post('/login', (req, res)=>{
-  console.log('this is the request ', req.body);
+app.post('/signup', (req, res)=>{
+  //check to see if user exists
+  //hash password
 
 
 
