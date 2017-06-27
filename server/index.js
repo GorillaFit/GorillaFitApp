@@ -8,7 +8,13 @@ var app = express();
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 
+
+
+
+
 app.get('/foods', function (req, res) {
+
+
   var options = {
     method: 'POST',
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
@@ -40,6 +46,7 @@ app.get('/foods', function (req, res) {
       res.send(body.foods);
       res.end();
     }
+
   });
 });
 
