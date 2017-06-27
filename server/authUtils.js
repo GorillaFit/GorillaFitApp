@@ -1,4 +1,4 @@
-module.exports.isAlreadyUser = (username, callback) => {
+module.exports.isNewUser = (username, callback) => {
   //these are dummy functions to always return true
   callback(null, true);
 }
