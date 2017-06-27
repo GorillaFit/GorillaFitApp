@@ -30,7 +30,7 @@ class SignUp extends React.Component {
         />,
         <RaisedButton
         label="Submit"
-        onTouchTap={this.handleSubmit.bind(this)}
+        onTouchTap={this.handleSignUpeSubmit.bind(this)}
         />
       ], 
       logInActions: [
@@ -48,7 +48,7 @@ class SignUp extends React.Component {
         />,
         <RaisedButton
         label="Log-in"
-        onTouchTap={this.handleSubmit.bind(this)}
+        onTouchTap={this.handleLogInSubmit.bind(this)}
         />
       ], 
 
@@ -63,7 +63,7 @@ class SignUp extends React.Component {
     this.setState({logInOpen: true})
   }
 
-  handleSubmit(e){
+  handleSignUpSubmit(e){
     e.preventDefault();
     axios.post('/signup', {
       userName: this.state.userName,
@@ -73,6 +73,22 @@ class SignUp extends React.Component {
       console.log('this request has been a success!');
       this.setState({signUpOpen: false})
       this.setState({logInOpen: true})
+    })
+    .catch((err)=>{
+      console.log('this request has been a FAIL! ', err);
+    })
+  }
+
+  handleLogInSubmit(e){
+    e.preventDefault();
+    axios.post('/login', {
+      userName: this.state.userName,
+      password: this.state.password
+    })
+    .then((res)=>{
+      console.log('this request has been a success!');
+      this.setState({LogInOpen: false})
+      //set the state of the app to be based on what the server sends back
     })
     .catch((err)=>{
       console.log('this request has been a FAIL! ', err);
