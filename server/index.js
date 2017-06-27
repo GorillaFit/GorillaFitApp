@@ -2,6 +2,11 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var authUtils = require('./authUtils.js');
+const Promise = require('bluebird');
+const bcrypt = require('bcryptjs')
+Promise.promisifyAll(bcrypt);
+Promise.promisifyAll(authUtils);
+
 
 var app = express();
 
@@ -24,11 +29,25 @@ app.use(bodyParser.json());
 // });
 
 app.post('/signup', (req, res)=>{
-  //check to see if user exists
-  //hash password
-
-
-
+  authUtils.isAlreadyUserAsync(req.body.userName)
+  .then(()=>{
+    return bcrypt.genSaltAsync(10)
+  })
+  .then(salt=>{
+    return bcrypt.hashAsync(req.body.password, salt)
+  })
+  .then(hashedPassword=>{
+    return authUtils.storeUserInDBAsync(req.body.userName, hashedPassword) 
+  })
+  .then(user=>{
+    res.status(201);
+    res.end()
+  })
+  .catch((err)=>{
+    console.log('this has been an error ', err)
+    res.status(404);
+    res.end()
+  })
 })
 
 

@@ -1,20 +1,11 @@
-const bcrypt = require('bcryptjs');
-
-const isAlreadyUser = userName => {
-  //if the user exists in the database
-    //return true
-  //else
-    //return false
-  return false;
+module.exports.isAlreadyUser = (username, callback) => {
+  //these are dummy functions to always return true
+  callback(null, true);
 }
 
-const hashPassword = password => {
-  //this will do all the cool password hashing stuff
-  //lets use bCrypt
-
+module.exports.storeUserInDB = (username, hashedPassword, callback) => {
+  //these are dummy functions to always return true
+  callback(null, true);
 }
 
-const storeUserInDB = (username, hashedPassword) => {
-  //this will store a user in the SQL database
 
-}
