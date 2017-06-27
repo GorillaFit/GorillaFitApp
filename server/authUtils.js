@@ -11,7 +11,7 @@ module.exports.isNewUser = (username, callback) => {
 
 module.exports.isExistingUser = (username, callback) => {
   //these are dummy functions to always return true
-  callback(null, true);
+  callback(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666});
 }
 
 module.exports.storeUserInDB = (username, hashedPassword, callback) => {
@@ -25,24 +25,5 @@ module.exports.getNutritionHistory = (username, callback) => {
 
 Promise.promisifyAll(module.exports);
 
-passport.use(new LocalStrategy(
-  function(username, plainTextPassword, done) {
-    console.log('this local thing is being called! ')
-    module.exports.isExistingUserAsync(username)
-    .then((user)=>{
-      return bcrypt.compareAsync(plainTextPassword, user.hash);
-    })
-    .then(()=>{
-      return bcrypt.getNutritionHistoryAsync(username);
-    })
-    .then((history)=>{
-      return done(null, history);
-    })
-    .catch((err)=>{
-      console.log('this is an error! ', err);
-      return done(null, false, {message: 'this is an error'});
-    })
-  })
-)
 
 

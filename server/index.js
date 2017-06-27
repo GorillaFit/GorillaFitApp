@@ -24,6 +24,7 @@ app.post('/signup', (req, res)=>{
     return bcrypt.hashAsync(req.body.password, salt)
   })
   .then(hashedPassword=>{
+    console.log('this is the hashed password of chicken ', hashedPassword)
     return authUtils.storeUserInDBAsync(req.body.userName, hashedPassword) 
   })
   .then(user=>{
@@ -36,33 +37,39 @@ app.post('/signup', (req, res)=>{
   })
 })
 
-
 passport.use(new LocalStrategy(
-  function(username, plainTextPassword, done) {
-    console.log('this local thing is being called! ')
-    module.exports.isExistingUserAsync(username)
+  function(username, password, done) {
+    authUtils.isExistingUserAsync(username)
     .then((user)=>{
-      return bcrypt.compareAsync(plainTextPassword, user.hash);
+      return bcrypt.compareAsync(password, user.hash);
     })
     .then(()=>{
-      return bcrypt.getNutritionHistoryAsync(username);
+      return authUtils.getNutritionHistoryAsync(username);
     })
     .then((history)=>{
-      console.log('we are inside history!!!')
-      return done(null, history);
+      return done(null, true, history);
     })
     .catch((err)=>{
-      console.log('this is an error! ', err);
-      return done(null, false, {message: 'this is an error'});
+      return done(null, false, {message: err});
     })
   })
 )
 
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  authUtils.getUserById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
 app.post('/login', passport.authenticate('local', 
-  {successRedirect: '/success', failureRedirect: '/fail'},
-  (req, res)=>{
-    console.log('this is what req and res look like ', req, res)
-}));
+  {successRedirect: '/success', 
+  failureRedirect: '/fail'}
+));
+
 
 app.get('/foods', function (req, res) {
   var options = {

@@ -82,7 +82,7 @@ class SignUp extends React.Component {
   handleLogInSubmit(e){
     e.preventDefault();
     axios.post('/login', {
-      userName: this.state.userName,
+      username: this.state.userName,
       password: this.state.password
     })
     .then((res)=>{
