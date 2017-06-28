@@ -8,6 +8,8 @@ Promise.promisifyAll(bcrypt);
 Promise.promisifyAll(authUtils);
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
+const db = require('../database/index.js');
+Promise.promisifyAll(db);
 
 var app = express();
 app.use(express.static(__dirname + '/../client/dist'));
@@ -16,15 +18,15 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.post('/signup', (req, res)=>{
-  authUtils.isNewUserAsync(req.body.userName)
+  db.isNewUserAsync(req.body.userName)
   .then(()=>{
-    return bcrypt.genSaltAsync(10)
+    return bcrypt.genSaltAsync(10);
   })
   .then(salt=>{
-    return bcrypt.hashAsync(req.body.password, salt)
+    return bcrypt.hashAsync(req.body.password, salt);
   })
   .then(hashedPassword=>{
-    return authUtils.storeUserInDBAsync(req.body.userName, hashedPassword) 
+    return db.insertUserAsync(req.body.userName, hashedPassword);
   })
   .then(user=>{
     res.status(201);
@@ -32,27 +34,27 @@ app.post('/signup', (req, res)=>{
   })
   .catch((err)=>{
     res.status(404);
-    res.end()
-  })
-})
+    res.end();
+  });
+});
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
-    authUtils.isExistingUserAsync(username)
+    db.isExistingUserAsync(username)
     .then((user)=>{
       return bcrypt.compareAsync(password, user.hash);
     })
     .then(()=>{
-      return authUtils.getNutritionHistoryAsync(username);
+      return db.getNutritionHistoryAsync(username);
     })
     .then((history)=>{
       return done(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666}, history);
     })
     .catch((err)=>{
       return done(null, false, {message: err});
-    })
+    });
   })
-)
+);
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -68,10 +70,9 @@ app.post('/login', passport.authenticate('local'),
   ((req, res)=>{
     res.status(201);
     res.json('THIS IS DATA I AM GIVING YOU');
-    res.end()
+    res.end();
   })
 );
-
 
 app.get('/foods', function (req, res) {
   var options = {
