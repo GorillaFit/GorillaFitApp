@@ -50,22 +50,20 @@ module.exports.findUserByID = function (id, callback) {
   });
 };
 
+
 module.exports.getHealthHistory = function (username, callback) {
   const healthHistory = {};
-  connection.queryAsync(`select id from user where username = '${username}';`)
-  .then((id)=>{
-    connection.queryAsync(`select * from food where username = '${id}';`)
-    .then((allFood)=>{
-      healthHistory.food = allFood;
-    });
-    connection.queryAsync(`select * from exercise where username = '${id}';`)
-    .then((allExercise)=>{
-      healthHistory.exercise = allExercise;
-      callback(healthHistory);
+  connection.query(`select id from user where username = '${username}';`, (err, results, fields)=>{
+    id = results[0]['id'];
+    connection.query(`select * from food where userid = '${id}';`, (err, results, fields)=>{
+      healthHistory.food = results;
+      connection.query(`select * from exercise where userid = '${id}';`, (err, results, fields)=>{
+        healthHistory.exercise = results;
+        callback(null, healthHistory);
+      });
     });
   });
 };
-
 
 
 

@@ -18,8 +18,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-db.getNutritionHistoryAsync('tyler');
+db.getHealthHistory('tyler', (history)=>{
+  console.log('this is a history ', history);
+});
 
+db.getHealthHistoryAsync('tyler')
+.then((history)=>{
+  console.log('this is the history from a promise ', history);  
+});
 
 
 
