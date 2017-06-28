@@ -24,7 +24,6 @@ app.post('/signup', (req, res)=>{
     return bcrypt.hashAsync(req.body.password, salt)
   })
   .then(hashedPassword=>{
-    console.log('this is the hashed password of chicken ', hashedPassword)
     return authUtils.storeUserInDBAsync(req.body.userName, hashedPassword) 
   })
   .then(user=>{
