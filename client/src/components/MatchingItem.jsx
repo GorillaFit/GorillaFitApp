@@ -28,14 +28,14 @@ class MatchingItem extends React.Component {
         addedFood: this.props.item.food_name || this.props.item.brand_name_item_name      }
     })
     .then((res) => {
-      this.props.addFood(this.props.meal,this.props.item.food_name || this.props.item.brand_name_item_name  , res.data[0].nf_calories,res.data[0].nf_total_fat, res.data[0].nf_total_carbohydrate,res.data[0].nf_protein )
+      this.props.addFood(this.props.iterator, this.props.meal,this.props.item.food_name || this.props.item.brand_name_item_name  , res.data[0].nf_calories,res.data[0].nf_total_fat, res.data[0].nf_total_carbohydrate,res.data[0].nf_protein)
     })
     .then(() => {
       this.setState({listClear: true })
       
     })
     .then( res => {
-      console.log(this.state)
+      this.props.splicer(this.props.iterator)
     })
     .catch((err) => {
       console.log(err)

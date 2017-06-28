@@ -17,6 +17,7 @@ class Search extends React.Component {
       meal: 'snack'
     }
     this.clearFoods = this.clearFoods.bind(this);
+    this.spliceFood = this.spliceFood.bind(this)
   }
 
   handleChange(e){
@@ -29,6 +30,12 @@ class Search extends React.Component {
      this.setState({userFoodItemInput: []})
   }
 
+  spliceFood (index) {
+  // var currFoods = this.state.matchingFoodItems.splice(index)
+  // this.setState({
+  //   matchingFoodItems: currFoods
+  // })
+  }
   dropdownChange (e) {
     //console.log('this is the val', e.target.value)
     this.setState({meal:e.target.value})
@@ -75,7 +82,7 @@ class Search extends React.Component {
             <option value='dinner'>Dinner</option>
           </select>
         </form>
-           {this.state.matchingFoodItems.map((item, i) => <MatchingItem meal={this.state.meal} addFood={this.props.addFood} clearMatchList= {this.clearFoods} item={item} iterator={i}/>)} 
+           {this.state.matchingFoodItems.map((item, i) => <MatchingItem splicer={this.spliceFood} meal={this.state.meal} addFood={this.props.addFood} clearMatchList= {this.clearFoods} item={item} iterator={i}/>)} 
           <br/>
       </div>
 

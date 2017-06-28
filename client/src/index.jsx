@@ -33,7 +33,7 @@ class App extends React.Component {
     this.addFood = this.addFood.bind(this);
   }
 
-  addFood (meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+  addFood (i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
     var tempItems = this.state.items;
     for (var key in tempItems) {
       if (key === meal) {
