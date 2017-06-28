@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+const Promise = require('bluebird');
 
 var connection = mysql.createConnection({
   host: 'localhost',
@@ -6,6 +7,8 @@ var connection = mysql.createConnection({
   password: 'student',
   database: 'gorilla_fit'
 });
+
+Promise.promisifyAll(connection);
 
 module.exports.selectAll = function (callback) {
   connection.query('SELECT * FROM user where ', function (err, results, fields) {
@@ -47,12 +50,24 @@ module.exports.findUserByID = function (id, callback) {
   });
 };
 
-module.exports.getNutritionHistory = function (id, callback) {
-  connection.query(`SELECT * FROM USER where id = ${id}`, function (err, results, fields) {
-    if (err) {
-      callback(err, null);
-    } else {
-      callback(null, results);
-    }
+module.exports.getHealthHistory = function (username, callback) {
+  const healthHistory = {};
+  connection.queryAsync(`select id from user where username = '${username}';`)
+  .then((id)=>{
+    connection.queryAsync(`select * from food where username = '${id}';`)
+    .then((allFood)=>{
+      healthHistory.food = allFood;
+    });
+    connection.queryAsync(`select * from exercise where username = '${id}';`)
+    .then((allExercise)=>{
+      healthHistory.exercise = allExercise;
+      callback(healthHistory);
+    });
   });
 };
+
+
+
+
+
+

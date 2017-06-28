@@ -333,28 +333,28 @@ INSERT INTO `food` (`userid`,`food_name`,`brand_name`,`calories`,`total_fat`,`sa
 -- ('10','gummy bears','234','23','43','32','3242','23','32','342','2342','234','423','23','snacks');
 
 
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('1', 'biceps','100','no link','weights');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('2', 'triceps','120','no link','weights');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('3', 'running','200','no link','cardio');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('4', 'walking','450','no link','cardio');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('5', 'swiming','600','no link','cardio');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('1', 'biceps','100','no link','weights');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('2', 'triceps','120','no link','weights');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('3', 'running','200','no link','cardio');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('4', 'walking','450','no link','cardio');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('5', 'swiming','600','no link','cardio');
 -- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
 -- ('6', 'rowing','700','no link','cardio');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('1', 'russian crunch','29','no link','fitness');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('2', 'burpee','300','no link','fitness');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('3', 'crunch','30','no link','fitness');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('4', 'wall sit','45','no link','fitness');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('5', 'squat','160','no link','fitness');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('1', 'russian crunch','29','no link','fitness');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('2', 'burpee','300','no link','fitness');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('3', 'crunch','30','no link','fitness');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('4', 'wall sit','45','no link','fitness');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('5', 'squat','160','no link','fitness');
 -- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
 -- ('6', 'lunge','240','no link','fitness');
 -- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
@@ -369,16 +369,16 @@ INSERT INTO `food` (`userid`,`food_name`,`brand_name`,`calories`,`total_fat`,`sa
 -- ('5', 'triceps','120','no link','weights');
 -- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
 -- ('6', 'running','200','no link','cardio');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('1', 'walking','450','no link','cardio');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('2', 'swiming','600','no link','cardio');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('3', 'rowing','700','no link','cardio');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('4', 'russian crunch','29','no link','fitness');
--- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
--- ('5', 'burpee','300','no link','fitness');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('1', 'walking','450','no link','cardio');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('2', 'swiming','600','no link','cardio');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('3', 'rowing','700','no link','cardio');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('4', 'russian crunch','29','no link','fitness');
+INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
+('5', 'burpee','300','no link','fitness');
 -- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES
 -- ('6', 'crunch','30','no link','fitness');
 -- INSERT INTO `exercise` (`userid`,`user_input`,`calories`,`photo`,`category`) VALUES

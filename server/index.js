@@ -17,6 +17,12 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+db.getNutritionHistoryAsync('tyler');
+
+
+
+
 app.post('/signup', (req, res)=>{
   db.isNewUserAsync(req.body.userName)
   .then(()=>{
@@ -45,7 +51,7 @@ passport.use(new LocalStrategy(
       return bcrypt.compareAsync(password, user.hash);
     })
     .then(()=>{
-      return db.getNutritionHistoryAsync(username);
+      return db.getHealthHistoryAsync(username);
     })
     .then((history)=>{
       return done(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666}, history);
