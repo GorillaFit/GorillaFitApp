@@ -47,7 +47,7 @@ passport.use(new LocalStrategy(
       return authUtils.getNutritionHistoryAsync(username);
     })
     .then((history)=>{
-      return done(null, true, history);
+      return done(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666}, history);
     })
     .catch((err)=>{
       return done(null, false, {message: err});
@@ -60,15 +60,18 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  authUtils.getUserById(id, function(err, user) {
+  authUtils.getUserByID(id, function(err, user) {
     done(err, user);
   });
 });
 
-app.post('/login', passport.authenticate('local', 
-  {successRedirect: '/success', 
-  failureRedirect: '/fail'}
-));
+app.post('/login', passport.authenticate('local'), 
+  ((req, res)=>{
+    res.status(201);
+    res.json('THIS IS DATA I AM GIVING YOU');
+    res.end()
+  })
+);
 
 
 app.get('/foods', function (req, res) {

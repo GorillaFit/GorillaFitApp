@@ -6,7 +6,7 @@ Promise.promisifyAll(bcrypt);
 
 module.exports.isNewUser = (username, callback) => {
   //these are dummy functions to always return true
-  callback(null, true);
+  callback(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666});
 }
 
 module.exports.isExistingUser = (username, callback) => {
@@ -16,11 +16,15 @@ module.exports.isExistingUser = (username, callback) => {
 
 module.exports.storeUserInDB = (username, hashedPassword, callback) => {
   //these are dummy functions to always return true
-  callback(null, true);
+  callback(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666});
 }
 
 module.exports.getNutritionHistory = (username, callback) => {
-  callback(null, true);
+  callback(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666});
+}
+
+module.exports.getUserByID = (id, callback) => {
+  callback(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666});
 }
 
 Promise.promisifyAll(module.exports);

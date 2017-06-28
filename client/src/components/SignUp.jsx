@@ -87,7 +87,8 @@ class SignUp extends React.Component {
     })
     .then((res)=>{
       console.log('this request has been a success!');
-      this.setState({LogInOpen: false})
+      this.setState({logInOpen: false})
+      console.log('this is the res ', res);
       //set the state of the app to be based on what the server sends back
     })
     .catch((err)=>{
