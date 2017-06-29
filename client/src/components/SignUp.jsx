@@ -58,9 +58,17 @@ class SignUp extends React.Component {
   handleSignUpOpen(){
     this.setState({signUpOpen: true})
   }
+  
+  handleSignUpClose(){
+    this.setState({signUpOpen: false})
+  }
 
   handleLogInOpen(){
     this.setState({logInOpen: true})
+  }
+  
+  handleLogInClose(){
+    this.setState({logInOpen: false})
   }
 
   handleSignUpSubmit(e){
@@ -87,13 +95,13 @@ class SignUp extends React.Component {
     })
     .then((res)=>{
       console.log('this request has been a success!');
-      this.setState({logInOpen: false})
+      this.setState({logInOpen: false});
       console.log('this is the res ', res);
       //set the state of the app to be based on what the server sends back
     })
     .catch((err)=>{
       console.log('this request has been a FAIL! ', err);
-    })
+    });
   }
 
   render() {
@@ -105,11 +113,13 @@ class SignUp extends React.Component {
               title="Sign up for an account" 
               open={this.state.signUpOpen}
               actions={this.state.signUpActions}
+              onRequestClose={this.handleSignUpClose.bind(this)}
             />
             <Dialog 
               title="Log into your account!" 
               open={this.state.logInOpen}
               actions={this.state.logInActions}
+              onRequestClose={this.handleLogInClose.bind(this)}
             />
          </div>
       </MuiThemeProvider>
