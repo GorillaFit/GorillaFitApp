@@ -26,6 +26,7 @@ app.post('/signup', (req, res)=>{
     return bcrypt.hashAsync(req.body.password, salt);
   })
   .then(hashedPassword=>{
+    console.log('this is a hashed password! ', hashedPassword);
     return db.insertUserAsync(req.body.userName, hashedPassword);
   })
   .then(user=>{
@@ -70,7 +71,6 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/login', passport.authenticate('local'), 
   ((req, res)=>{
-    console.log('this is req.user!! ', req.user);
     res.status(201);
     res.json(req.user[0].history);
     res.end();

@@ -114,15 +114,15 @@ ALTER TABLE `exercise` ADD FOREIGN KEY (userid) REFERENCES `user` (`id`);
 
 
 INSERT INTO `user` (`id`,`username`, `hash`) VALUES
-('1','ben', 'q734iyf87438y8fwf98743t');
+('1','ben', '$2a$10$TR/VBJKsNuBLya12GujrQOZPLVRXZDkqdKgxFNIHvQo8nKUhzhTSi');
 INSERT INTO `user` (`id`,`username`, `hash`) VALUES
-('2','david', 'hfiuqh789qy7934fqf24f');
+('2','david', '$2a$10$KLip0UFn2lDJ5Y2GEyUznuLfDeuW7F07.pzrJm726skcg84m9zlWS');
 INSERT INTO `user` (`id`,`username`, `hash`) VALUES
-('3','jake', 'hg8934a7yghuighiu4ahiw');
+('3','jake', '$2a$10$qT.iHueiyTWZNOl0nxRicOUVmsF6bGTHfZs7Excs8t4PJmhkhFYG.');
 INSERT INTO `user` (`id`,`username`, `hash`) VALUES
-('4','karina', 'jgau8ehui7hfa4fiwuh');
+('4','karina', '$2a$10$NXBei80BF3BusjG0IswObORDC3flLGgqfTpo4DmB2kyjrkoJ499ki');
 INSERT INTO `user` (`id`,`username`, `hash`) VALUES
-('5','tyler', 'hfaui8oih4io8dhfgai');
+('5','tyler', '$2a$10$IdGip3FMzKvddSgTmJtvpehxbmP5SxnOrRzeBhZhwzS.Y3i0ku/lC');
 -- INSERT INTO `user` (`id`,`username`) VALUES
 -- ('6','jacob');
 -- INSERT INTO `user` (`id`,`username`) VALUES
