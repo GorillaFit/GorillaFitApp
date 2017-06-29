@@ -29,12 +29,11 @@ app.post('/signup', (req, res)=>{
     return db.insertUserAsync(req.body.userName, hashedPassword);
   })
   .then(user=>{
-    console.log('we are getting to end');
     res.status(201);
     res.end();
   })
   .catch((err)=>{
-    console.log('we are getting to error ', err);
+    console.log(err);
     res.status(404);
     res.end();
   });
@@ -44,7 +43,7 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     db.isExistingUserAsync(username)
     .then((user)=>{
-      return bcrypt.compareAsync(password, user.hash);
+      return bcrypt.compareAsync(password, user[0].hash);
     })
     .then(()=>{
       return db.getHealthHistoryAsync(username);
@@ -59,6 +58,7 @@ passport.use(new LocalStrategy(
 );
 
 passport.serializeUser(function(user, done) {
+  console.log('this is the user! ', user);
   done(null, user.id);
 });
 

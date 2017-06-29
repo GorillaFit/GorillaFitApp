@@ -33,8 +33,10 @@ module.exports.isNewUser = function (username, callback) {
 module.exports.isExistingUser = function (username, callback) {
   connection.query(`SELECT * FROM USER where USERNAME = '${username}'`, function (err, results, fields) {
     if (results.length === 0 ) {
+      console.log('this user dont exist');
       callback({err: 'this user doesnt exist!'}, null);
     } else {
+      console.log('this user DO exist');
       callback(null, results);
     }
   });
