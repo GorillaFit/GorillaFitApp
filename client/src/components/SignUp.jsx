@@ -55,23 +55,23 @@ class SignUp extends React.Component {
     };
   }
 
-  handleSignUpOpen(){
-    this.setState({signUpOpen: true})
+  handleSignUpOpen() {
+    this.setState({signUpOpen: true});
   }
   
-  handleSignUpClose(){
-    this.setState({signUpOpen: false})
+  handleSignUpClose() {
+    this.setState({signUpOpen: false});
   }
 
-  handleLogInOpen(){
-    this.setState({logInOpen: true})
+  handleLogInOpen() {
+    this.setState({logInOpen: true});
   }
   
-  handleLogInClose(){
-    this.setState({logInOpen: false})
+  handleLogInClose() {
+    this.setState({logInOpen: false});
   }
 
-  handleSignUpSubmit(e){
+  handleSignUpSubmit(e) {
     e.preventDefault();
     axios.post('/signup', {
       userName: this.state.userName,
@@ -79,15 +79,15 @@ class SignUp extends React.Component {
     })
     .then((res)=>{
       console.log('this request has been a success!');
-      this.setState({signUpOpen: false})
-      this.setState({logInOpen: true})
+      this.setState({signUpOpen: false});
+      this.setState({logInOpen: true});
     })
     .catch((err)=>{
       console.log('this request has been a FAIL! ', err);
-    })
+    });
   }
 
-  handleLogInSubmit(e){
+  handleLogInSubmit(e) {
     e.preventDefault();
     axios.post('/login', {
       username: this.state.userName,
@@ -127,7 +127,5 @@ class SignUp extends React.Component {
   }
 
 }
-
-
 
 export default SignUp;

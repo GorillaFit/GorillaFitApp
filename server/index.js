@@ -4,11 +4,13 @@ var request = require('request');
 var authUtils = require('./authUtils.js');
 const Promise = require('bluebird');
 const bcrypt = require('bcryptjs');
+const flash = require('connect-flash');
 Promise.promisifyAll(bcrypt);
 Promise.promisifyAll(authUtils);
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const db = require('../database/index.js');
+
 Promise.promisifyAll(db);
 
 var app = express();
@@ -16,6 +18,8 @@ app.use(express.static(__dirname + '/../client/dist'));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+
 
 app.post('/signup', (req, res)=>{
   db.isNewUserAsync(req.body.userName)
@@ -71,6 +75,7 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/login', passport.authenticate('local'), 
   ((req, res)=>{
+    req.flash('info', 'Hi there!');
     res.status(201);
     res.json(req.user[0].history);
     res.end();
@@ -104,7 +109,6 @@ app.get('/foods', function (req, res) {
       throw new Error(error);
     } else {
       res.status(200);
-      console.log(body.foods);
       res.send(body.foods);
       res.end();
     }
