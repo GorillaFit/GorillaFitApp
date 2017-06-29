@@ -17,18 +17,6 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 
-
-db.getHealthHistory('tyler', (history)=>{
-  console.log('this is a history ', history);
-});
-
-db.getHealthHistoryAsync('tyler')
-.then((history)=>{
-  console.log('this is the history from a promise ', history);  
-});
-
-
-
 app.post('/signup', (req, res)=>{
   db.isNewUserAsync(req.body.userName)
   .then(()=>{
@@ -41,10 +29,12 @@ app.post('/signup', (req, res)=>{
     return db.insertUserAsync(req.body.userName, hashedPassword);
   })
   .then(user=>{
+    console.log('we are getting to end');
     res.status(201);
     res.end();
   })
   .catch((err)=>{
+    console.log('we are getting to error ', err);
     res.status(404);
     res.end();
   });
@@ -60,7 +50,7 @@ passport.use(new LocalStrategy(
       return db.getHealthHistoryAsync(username);
     })
     .then((history)=>{
-      return done(null, {hash: '$2a$10$cipR4w9YTfARaARv6NmohejFk/1OtO2YNHtYE0OywVrgQ.H51FqvS', id: 666}, history);
+      return done(null, history);
     })
     .catch((err)=>{
       return done(null, false, {message: err});
@@ -80,6 +70,7 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/login', passport.authenticate('local'), 
   ((req, res)=>{
+    console.log('this is req.user!! ', req);
     res.status(201);
     res.json('THIS IS DATA I AM GIVING YOU');
     res.end();

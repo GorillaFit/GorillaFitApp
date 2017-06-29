@@ -50,7 +50,6 @@ module.exports.findUserByID = function (id, callback) {
   });
 };
 
-
 module.exports.getHealthHistory = function (username, callback) {
   const healthHistory = {};
   connection.query(`select id from user where username = '${username}';`, (err, results, fields)=>{
@@ -62,6 +61,16 @@ module.exports.getHealthHistory = function (username, callback) {
         callback(null, healthHistory);
       });
     });
+  });
+};
+
+module.exports.insertUser = function (username, hash, callback) {
+  connection.query(`insert into user (username, hash) values ('${username}', '${hash}');`, (err, results, fields)=>{
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
   });
 };
 
