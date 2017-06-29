@@ -43,13 +43,14 @@ passport.use(new LocalStrategy(
   function(username, password, done) {
     db.isExistingUserAsync(username)
     .then((user)=>{
-      return bcrypt.compareAsync(password, user[0].hash);
-    })
-    .then(()=>{
-      return db.getHealthHistoryAsync(username);
-    })
-    .then((history)=>{
-      return done(null, history);
+      bcrypt.compareAsync(password, user[0].hash)
+      .then(()=>{
+        return db.getHealthHistoryAsync(username);
+      })
+      .then((history)=>{
+        user[0].history = history;
+        return done(null, user, history);
+      });
     })
     .catch((err)=>{
       return done(null, false, {message: err});
@@ -58,8 +59,7 @@ passport.use(new LocalStrategy(
 );
 
 passport.serializeUser(function(user, done) {
-  console.log('this is the user! ', user);
-  done(null, user.id);
+  done(null, user[0].id);
 });
 
 passport.deserializeUser(function(id, done) {
@@ -70,9 +70,9 @@ passport.deserializeUser(function(id, done) {
 
 app.post('/login', passport.authenticate('local'), 
   ((req, res)=>{
-    console.log('this is req.user!! ', req);
+    console.log('this is req.user!! ', req.user);
     res.status(201);
-    res.json('THIS IS DATA I AM GIVING YOU');
+    res.json(req.user[0].history);
     res.end();
   })
 );
