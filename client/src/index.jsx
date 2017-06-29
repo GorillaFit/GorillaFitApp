@@ -6,8 +6,8 @@ import Search from './components/Search.jsx';
 import Items from './components/Items.jsx';
 import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
+import SignUp from './components/SignUp.jsx';
 import update from 'immutability-helper';
-
 /*Exercise Components*/
 import SearchExercise from './components/SearchExercise.jsx';
 import Exercises from './components/Exercises.jsx';
@@ -96,6 +96,7 @@ class App extends React.Component {
 
   render() {
     return (<div>
+      <SignUp />
       <Search addFood={this.addFood} />
       <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
       <Calories totalCalories={this.state.totalCalories} />
