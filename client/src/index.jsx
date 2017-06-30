@@ -20,6 +20,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      date: Date.now(),
       username: null,
       items: {
         breakfast: [],
@@ -82,6 +83,28 @@ class App extends React.Component {
 
   setUsername(username){
     this.setState({'username': username});
+  }
+
+  onBack(e){ 
+    e.preventDefault();
+    let oneDayBack = new Date(new Date().setDate(new Date(this.state.date).getDate()-1));
+    this.setState({date: oneDayBack})
+    axios.get('/userfoods', {
+      params: {
+        username: this.username,
+        date: this.date
+      }
+    })
+    .then((res) => {
+      //do something with the data
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
+  onForward(){
+
   }
 
 
