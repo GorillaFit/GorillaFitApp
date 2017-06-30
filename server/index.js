@@ -74,6 +74,28 @@ app.get('/test', function(req, res) {
 })
 })  
 
+app.post('/food', function(req, res) {
+  db.insertFoodAndDataForUserAsync(req.query.username, req.query.food.food_name, req.query.date)
+  .then((result) => {
+    res.send(201);
+    res.send('data inserted successfully')
+    res.end();
+  })
+  .catch((err) => {
+    res.end('there was an error')
+  })
+})
+
+
+app.get('/userfood', function(req, res) {
+  db.getFoodsFromUserOnDateAsync(req.query.username, req.query.date)
+  .then((foodHistory)=> {
+    res.status(200);
+    res.send(foodHistory);
+    res.end();
+  });
+})
+
 
 
 
@@ -162,8 +184,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 app.post('/login', passport.authenticate('local'), 
-  ((req, res)=>{
-    req.flash('info', 'Hi there!');
+  ((req, res)=>{\
     res.status(201);
     res.json(req.user[0].history);
     res.end();
