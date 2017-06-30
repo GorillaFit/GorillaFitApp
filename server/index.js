@@ -44,6 +44,14 @@ app.post('/signup', (req, res)=>{
   });
 });
 
+
+
+app.post('/foods', (req, res)=>{
+  console.log('this is the request body! ', req.body);
+  res.status(201)
+  res.end()
+});
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
     db.isExistingUserAsync(username)
@@ -139,6 +147,14 @@ app.get('/exercise', function(req, res) {
       res.send(body);
     }
   });
+});
+
+app.get('/userfoods', function(req, res) {
+  console.log('this is the req.url ', req.query)
+});
+
+app.get('/foods', function(req, res) {
+  console.log('this is the request body ', req.body);
 });
 
 const PORT = process.env.PORT || 3000;
