@@ -28,8 +28,14 @@ class Search extends React.Component {
     this.setState({ meal: e.target.value });
   }
 
+  postFood(foodObject){
+    axios.post('/foods', {
+      food: foodObject,
+      username: this.props.username
+    })
+  }
+
   handleClick(e) {
-    //console.log(this.state.userFoodItemInput)
     e.preventDefault();
     axios.get('/foods', {
       params: {
@@ -40,7 +46,7 @@ class Search extends React.Component {
       var tempMatchingFoods = this.state.matchingFoodItems.slice();
       tempMatchingFoods.push(res.data);
       this.setState({ matchingFoodItems: tempMatchingFoods });
-      console.log(this.state.matchingFoodItems[0][0]);
+      this.postFood(res.data)
     })
     .then(() => {
       this.setState({

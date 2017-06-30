@@ -44,6 +44,12 @@ app.post('/signup', (req, res)=>{
   });
 });
 
+
+
+app.post('/foods', (req, res)=>{
+  console.log('this is the request body! ', req.body)
+});
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
     db.isExistingUserAsync(username)

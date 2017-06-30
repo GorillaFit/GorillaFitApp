@@ -68,7 +68,6 @@ class App extends React.Component {
     console.log(this.state.items);
   }
 
-  /* handlefunction for adding exercise */
   addExercise(result) {
     var tempArray = this.state.exercises.slice();
     tempArray.push(result.exercises[0].name);
@@ -87,7 +86,7 @@ class App extends React.Component {
   render() {
     return (<div>
       <SignUp setUsername={this.setUsername.bind(this)}/>
-      <Search addFood={this.addFood} />
+      <Search addFood={this.addFood} username={this.state.username}/>
       <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
       <Calories totalCalories={this.state.totalCalories} />
       <Nutrients fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein} />
