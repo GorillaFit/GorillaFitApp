@@ -14,6 +14,8 @@ import Exercises from './components/Exercises.jsx';
 import CalorieOutput from './components/CalorieOutput.jsx';
 import BackButton from './components/backButton.jsx';
 import ForwardButton from './components/forwardButton.jsx';
+import axios from 'axios';
+
 
 
 class App extends React.Component {
@@ -103,7 +105,22 @@ class App extends React.Component {
     });
   }
 
-  onForward(){
+  onForward(e){
+    e.preventDefault();
+    let oneDayBack = new Date(new Date().setDate(new Date(this.state.date).getDate()+1));
+    this.setState({date: oneDayBack})
+    axios.get('/userfoods', {
+      params: {
+        username: this.username,
+        date: this.date
+      }
+    })
+    .then((res) => {
+      //do something with the data
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   }
 
@@ -111,8 +128,8 @@ class App extends React.Component {
   render() {
     return (
     <div>
-      <ForwardButton />
-      <BackButton />
+      <ForwardButton onForward={this.onForward.bind(this)}/>
+      <BackButton onBack={this.onBack.bind(this)}/>
       <SignUp setUsername={this.setUsername.bind(this)}/>
       <Search addFood={this.addFood} username={this.state.username}/>
       <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />

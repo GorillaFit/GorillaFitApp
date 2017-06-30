@@ -149,6 +149,10 @@ app.get('/exercise', function(req, res) {
   });
 });
 
+app.get('/userfoods', function(req, res) {
+  console.log('this is the request body! ', req.body);
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {
   console.log(`listening on port ${PORT}!`);
