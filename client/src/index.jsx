@@ -18,6 +18,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: null,
       items: {
         breakfast: [],
         lunch: [],
@@ -78,25 +79,14 @@ class App extends React.Component {
     });
   }
 
-  // componentDidMount() {
-  //   $.ajax({
-  //     url: '/items',
-  //     method: 'GET',
-  //     success: (data) => {
-  //       //console.log(data.foods)
-  //       this.setState({
-  //         items: data.foods
-  //       })
-  //     },
-  //     error: (err) => {
-  //       console.log('err', err);
-  //     }
-  //   });
-  // }
+  setUsername(username){
+    this.setState({'username': username});
+  }
+
 
   render() {
     return (<div>
-      <SignUp />
+      <SignUp setUsername={this.setUsername.bind(this)}/>
       <Search addFood={this.addFood} />
       <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
       <Calories totalCalories={this.state.totalCalories} />
