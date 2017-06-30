@@ -151,7 +151,10 @@ app.get('/exercise', function(req, res) {
 
 app.get('/userfoods', function(req, res) {
   console.log('this is the req.url ', req.query)
-  
+});
+
+app.get('/foods', function(req, res) {
+  console.log('this is the request body ', req.body);
 });
 
 const PORT = process.env.PORT || 3000;

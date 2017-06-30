@@ -29,10 +29,12 @@ class Search extends React.Component {
   }
 
   postFood(foodObject){
-    axios.post('/foods', {
-      food: foodObject,
-      username: this.props.username
-    })
+    if(this.props.username){
+      axios.post('/foods', {
+        food: foodObject,
+        username: this.props.username
+      })
+    }
   }
 
   handleClick(e) {
@@ -57,6 +59,8 @@ class Search extends React.Component {
       console.log(err);
     });
   }
+
+
   render() {
     return (
       <div>
