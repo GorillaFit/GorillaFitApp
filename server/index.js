@@ -150,7 +150,8 @@ app.get('/exercise', function(req, res) {
 });
 
 app.get('/userfoods', function(req, res) {
-  console.log('this is the request body! ', req.body);
+  console.log('this is the req.url ', req.query)
+  
 });
 
 const PORT = process.env.PORT || 3000;

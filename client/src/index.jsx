@@ -8,14 +8,12 @@ import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
 import SignUp from './components/SignUp.jsx';
 import update from 'immutability-helper';
-/*Exercise Components*/
 import SearchExercise from './components/SearchExercise.jsx';
 import Exercises from './components/Exercises.jsx';
 import CalorieOutput from './components/CalorieOutput.jsx';
 import BackButton from './components/backButton.jsx';
 import ForwardButton from './components/forwardButton.jsx';
 import axios from 'axios';
-
 
 
 class App extends React.Component {
@@ -46,8 +44,6 @@ class App extends React.Component {
         'fencing'
       ],
       calorieOutput: 560
-
-
     };
     this.addFood = this.addFood.bind(this);
   }
@@ -106,13 +102,14 @@ class App extends React.Component {
   }
 
   onForward(e){
+    console.log('this date ', this.state.date)
     e.preventDefault();
-    let oneDayBack = new Date(new Date().setDate(new Date(this.state.date).getDate()+1));
+    let oneDayBack = new Date().setDate(new Date(this.state.date).getDate()+1);
     this.setState({date: oneDayBack})
     axios.get('/userfoods', {
       params: {
-        username: this.username,
-        date: this.date
+        username: JSON.stringify(this.state.username),
+        date: JSON.stringify(oneDayBack)
       }
     })
     .then((res) => {
@@ -121,9 +118,7 @@ class App extends React.Component {
     .catch((err) => {
       console.log(err);
     });
-
   }
-
 
   render() {
     return (
