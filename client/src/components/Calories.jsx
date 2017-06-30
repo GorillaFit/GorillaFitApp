@@ -7,4 +7,5 @@ const Calories = (props) => (
   </div>
 )
 
+
 export default Calories;

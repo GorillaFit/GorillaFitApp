@@ -6,7 +6,13 @@ import Search from './components/Search.jsx';
 import Items from './components/Items.jsx';
 import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
+
+import SignUp from './components/SignUp.jsx';
 import update from 'immutability-helper';
+/*Exercise Components*/
+import SearchExercise from './components/SearchExercise.jsx';
+import Exercises from './components/Exercises.jsx';
+import CalorieOutput from './components/CalorieOutput.jsx';
 
 
 class App extends React.Component {
@@ -17,7 +23,8 @@ class App extends React.Component {
         breakfast: [],
         lunch: [],
         dinner: [],
-        snack:[]
+
+        snack: []
       },
       //the below represents the food items that the user has selected
       //to see it in action, paste in 'pizza - 450 calories', 'ice cream - 800 calories'
@@ -33,7 +40,25 @@ class App extends React.Component {
     this.addFood = this.addFood.bind(this);
   }
 
-  addFood (i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+//   addFood (i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+// =======
+//       fat: 0,
+//       carbs: 0,
+//       protein: 0,
+//       //Below are dummy data for exercises and calorie output
+//       exercises: [
+//         'rowing',
+//         'fencing'
+//       ],
+//       calorieOutput: 560
+
+
+//     };
+//     this.addFood = this.addFood.bind(this);
+//   }
+
+  addFood(i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+
     var tempItems = this.state.items;
     for (var key in tempItems) {
       if (key === meal) {
@@ -46,12 +71,28 @@ class App extends React.Component {
     var newProtein = this.state.protein + Math.floor(proteinToAdd);
     this.setState({
       items: tempItems,
-      totalCalories:newTotalCalories,
+
+
+      totalCalories: newTotalCalories,
       fat: newFat,
       carbs: newCarbs,
       protein: newProtein
     });
     console.log(this.state.items)
+  }
+
+
+
+
+  /* handlefunction for adding exercise */
+  addExercise(result) {
+    var tempArray = this.state.exercises.slice();
+    tempArray.push(result.exercises[0].name);
+
+    this.setState({
+      exercises: tempArray,
+      calorieOutput: this.state.calorieOutput + result.exercises[0].nf_calories
+    });
   }
 
   // componentDidMount() {
@@ -72,18 +113,26 @@ class App extends React.Component {
 
   render() {
     return (<div>
-      <Search addFood={this.addFood}/>
-      <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack}/>
-      <Calories totalCalories = {this.state.totalCalories}/>
-      <Nutrients  fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein}/>
-    </div>)
+      <SignUp />
+      <Search addFood={this.addFood} />
+      <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
+      <Calories totalCalories={this.state.totalCalories} />
+      <Nutrients fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein} />
+      <hr/>
+      <SearchExercise addExercise={this.addExercise.bind(this)}/>
+      <Exercises exercises={this.state.exercises}/>
+      <CalorieOutput calorieOutput={this.state.calorieOutput}/>
+    </div >);
   }
 }
 
+
 ReactDOM.render(<App />, document.getElementById('app'));
+
 
 
 //this index will have 3 components 
 //search 
 //items
 //calories
+
