@@ -16,7 +16,6 @@ class Search extends React.Component {
   handleChange(e) {
     console.log('handle change is firing');
     this.setState({ userFoodItemInput: e.target.value });
-    //console.log(this.state.userFoodItemInput)
   }
 
   clearFoods() {
@@ -32,7 +31,8 @@ class Search extends React.Component {
     if(this.props.username){
       axios.post('/foods', {
         food: foodObject,
-        username: this.props.username
+        username: this.props.username,
+        date: Date.now()
       })
     }
   }
@@ -59,7 +59,6 @@ class Search extends React.Component {
       console.log(err);
     });
   }
-
 
   render() {
     return (
