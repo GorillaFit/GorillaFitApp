@@ -85,26 +85,7 @@ class App extends React.Component {
 
   onBack(e){ 
     e.preventDefault();
-    let oneDayBack = new Date(new Date().setDate(new Date(this.state.date).getDate()-1));
-    this.setState({date: oneDayBack})
-    axios.get('/userfoods', {
-      params: {
-        username: this.username,
-        date: this.date
-      }
-    })
-    .then((res) => {
-      //do something with the data
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-  }
-
-  onForward(e){
-    console.log('this date ', this.state.date)
-    e.preventDefault();
-    let oneDayBack = new Date().setDate(new Date(this.state.date).getDate()+1);
+    let oneDayBack = new Date().setDate(new Date(this.state.date).getDate()-1);
     this.setState({date: oneDayBack})
     axios.get('/userfoods', {
       params: {
@@ -120,12 +101,31 @@ class App extends React.Component {
     });
   }
 
+  onForward(e){
+    console.log('this date ', this.state.date)
+    e.preventDefault();
+    let oneDayForward = new Date().setDate(new Date(this.state.date).getDate()+1);
+    this.setState({date: oneDayForward})
+    axios.get('/userfoods', {
+      params: {
+        username: JSON.stringify(this.state.username),
+        date: JSON.stringify(oneDayForward)
+      }
+    })
+    .then((res) => {
+      //do something with the data
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+
   render() {
     return (
     <div>
-      <ForwardButton onForward={this.onForward.bind(this)}/>
-      <BackButton onBack={this.onBack.bind(this)}/>
-      <SignUp setUsername={this.setUsername.bind(this)}/>
+      {this.state.username ? <ForwardButton onForward={this.onForward.bind(this)}/> : ''}
+      {this.state.username ? <BackButton onBack={this.onBack.bind(this)}/> : ''}
+      {this.state.username ? '' : <SignUp setUsername={this.setUsername.bind(this)}/>}
       <Search addFood={this.addFood} username={this.state.username}/>
       <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
       <Calories totalCalories={this.state.totalCalories} />
