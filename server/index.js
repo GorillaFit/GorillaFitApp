@@ -47,7 +47,9 @@ app.post('/signup', (req, res)=>{
 
 
 app.post('/foods', (req, res)=>{
-  console.log('this is the request body! ', req.body)
+  console.log('this is the request body! ', req.body);
+  res.status(201)
+  res.end()
 });
 
 passport.use(new LocalStrategy(

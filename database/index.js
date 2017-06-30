@@ -76,6 +76,12 @@ module.exports.insertUser = function (username, hash, callback) {
   });
 };
 
+module.exports.insertFood = function (username, food, callback) {
+  connection.query(`select id from user where username = '${username}';`, (err, results, fields)=>{
+    id = results[0]['id'];
+  });
+};
+
 
 
 

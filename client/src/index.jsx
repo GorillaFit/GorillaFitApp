@@ -12,6 +12,8 @@ import update from 'immutability-helper';
 import SearchExercise from './components/SearchExercise.jsx';
 import Exercises from './components/Exercises.jsx';
 import CalorieOutput from './components/CalorieOutput.jsx';
+import BackButton from './components/backButton.jsx';
+import ForwardButton from './components/forwardButton.jsx';
 
 
 class App extends React.Component {
@@ -84,7 +86,10 @@ class App extends React.Component {
 
 
   render() {
-    return (<div>
+    return (
+    <div>
+      <ForwardButton />
+      <BackButton />
       <SignUp setUsername={this.setUsername.bind(this)}/>
       <Search addFood={this.addFood} username={this.state.username}/>
       <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
