@@ -52,22 +52,6 @@ class App extends React.Component {
     this.addFood = this.addFood.bind(this);
   }
 
-//   addFood (i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
-// =======
-//       fat: 0,
-//       carbs: 0,
-//       protein: 0,
-//       //Below are dummy data for exercises and calorie output
-//       exercises: [
-//         'rowing',
-//         'fencing'
-//       ],
-//       calorieOutput: 560
-
-
-//     };
-//     this.addFood = this.addFood.bind(this);
-//   }
 
   addFood(i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
 

@@ -15,7 +15,7 @@ class Search extends React.Component {
       //Such as 'apple - 100 calories', 'cheese - 230 calories'
 
       meal: 'snack'
-    }
+    },
     this.clearFoods = this.clearFoods.bind(this);
     this.spliceFood = this.spliceFood.bind(this)
   }
@@ -50,7 +50,8 @@ class Search extends React.Component {
     axios.get('/test', {
       matchingFoodItems: [],
       meal: 'snack'
-    };
+    })
+
     this.clearFoods = this.clearFoods.bind(this);
   }
 
@@ -106,10 +107,6 @@ class Search extends React.Component {
       <div>
         <form>
           Input Your Food:
-
-          <input id="input" type="text" name="food_item" value={this.state.userFoodItemInput} onChange={this.handleChange.bind(this)}/>
-          <input id="submit" type="submit" value="Submit" onClick={this.handleClick.bind(this)}/>
-          <br/>
 
           <input id="input" type="text" name="food_item" value={this.state.userFoodItemInput} onChange={this.handleChange.bind(this)} />
           <input id="submit" type="submit" value="Submit" onClick={this.handleClick.bind(this)} />

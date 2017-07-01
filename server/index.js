@@ -118,18 +118,19 @@ app.get('/foods', function (req, res) {
    };
 
   request(options, function (error, response, body) {
-    if (error) {
-      console.log('here in error')
-	  throw new Error(error);
-	} else {
-	  res.status(200)
-	  console.log('this is the body',body)
-	  res.send(body.foods)
-	  res.end();
-	  
-	}
+      if (error) {
+        console.log('here in error')
+  	  throw new Error(error);
+  	} else {
+  	  res.status(200)
+  	  console.log('this is the body',body)
+  	  res.send(body.foods)
+  	  res.end();
+  	  
+  	}
 	
-    });
+  });
+});
 
 app.post('/signup', (req, res)=>{
   db.isNewUserAsync(req.body.userName)
@@ -192,7 +193,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 app.post('/login', passport.authenticate('local'), 
-  ((req, res)=>{\
+  ((req, res)=>{
     res.status(201);
     res.json(req.user[0].history);
     res.end();
@@ -231,6 +232,7 @@ app.get('/foods', function (req, res) {
     }
 
   });
+})
 
 
 

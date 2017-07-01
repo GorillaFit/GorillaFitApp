@@ -11,7 +11,7 @@ class MatchingItem extends React.Component {
       foodName: null
     }
     this.addFood = this.addFood.bind(this)
-    //console.log(this)
+    console.log(props)
   }
 
 
