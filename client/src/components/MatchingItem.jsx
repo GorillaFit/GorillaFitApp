@@ -20,6 +20,9 @@ class MatchingItem extends React.Component {
         username: this.props.username,
         date: Date.now()
       })
+      .catch((err)=>{
+        console.log('this is an err ', err);
+      })
     }
   }
 
@@ -37,14 +40,14 @@ class MatchingItem extends React.Component {
         addedFood: this.props.item.food_name || this.props.item.brand_name_item_name      }
     })
     .then((res) => {
-      this.props.addFood(this.props.iterator, this.props.meal,this.props.item.food_name || this.props.item.brand_name_item_name  , res.data[0].nf_calories,res.data[0].nf_total_fat, res.data[0].nf_total_carbohydrate,res.data[0].nf_protein)
+      this.props.addFood(this.props.iterator, this.props.meal,this.props.item.food_name || this.props.item.brand_name_item_name  , res.data[0].nf_calories,res.data[0].nf_total_fat, res.data[0].nf_total_carbohydrate,res.data[0].nf_protein, res)
+      this.postFood(res);
     })
     .then(() => {
       this.setState({listClear: true })
       
     })
     .then( res => {
-      this.postFood(res);
       //this.props.splicer(this.props.iterator)
     })
     .catch((err) => {
