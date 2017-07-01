@@ -36,7 +36,7 @@ class MatchingItem extends React.Component {
       
     })
     .then( res => {
-      this.props.splicer(this.props.iterator)
+      //this.props.splicer(this.props.iterator)
     })
     .catch((err) => {
       console.log(err)

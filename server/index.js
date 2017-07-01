@@ -166,6 +166,7 @@ app.post('/login', passport.authenticate('local'),
   ((req, res)=>{
     res.status(201);
     res.json(req.user[0].history);
+    console.log('this is the history we get from a user ', req.user[0].history)
     res.end();
   })
 );

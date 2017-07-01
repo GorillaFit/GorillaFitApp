@@ -70,6 +70,7 @@ class Search extends React.Component {
   }
 
   postFood(foodObject){
+    console.log('post food is being called! ')
     if(this.props.username){
       axios.post('/foods', {
         food: foodObject,
@@ -79,7 +80,7 @@ class Search extends React.Component {
     }
   }
 
-  handleClick(e) {
+  handleClick(e) {  
     e.preventDefault();
     axios.get('/test', {
       params: {
@@ -91,7 +92,6 @@ class Search extends React.Component {
       console.log('here is res data', res.data)
       tempMatchingFoods.push(res.data);
       this.setState({ matchingFoodItems: res.data });
-      this.postFood(res.data)
     })
     .then(() => {
       this.setState({
