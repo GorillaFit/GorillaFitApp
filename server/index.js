@@ -99,38 +99,6 @@ app.get('/userfood', function(req, res) {
 
 
 
-app.get('/foods', function (req, res) {
-  console.log('reqquery is' , req.query)
-  var options = { 
-    method: 'POST',
-    url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
-    headers: { 
-      'content-type': 'application/json',
-      'x-app-key': xAppKey,
-      'x-app-id': xAppId 
-    },
-
-    body: { 
-      query: req.query.addedFood,
-      timezone: 'US/Eastern' 
-     },
-     json: true 
-   };
-
-  request(options, function (error, response, body) {
-      if (error) {
-        console.log('here in error')
-  	  throw new Error(error);
-  	} else {
-  	  res.status(200)
-  	  console.log('this is the body',body)
-  	  res.send(body.foods)
-  	  res.end();
-  	  
-  	}
-	
-  });
-});
 
 app.post('/signup', (req, res)=>{
   db.isNewUserAsync(req.body.userName)
@@ -182,6 +150,8 @@ passport.use(new LocalStrategy(
   })
 );
 
+
+
 passport.serializeUser(function(user, done) {
   done(null, user[0].id);
 });
@@ -200,39 +170,73 @@ app.post('/login', passport.authenticate('local'),
   })
 );
 
+// app.get('/foods', function (req, res) {
+//   var options = {
+//     method: 'POST',
+//     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
+//     headers: {
+//       'content-type': 'application/json',
+//       'x-app-key': '599e301928d15020ff16d7dbeef77f6f',
+//       'x-app-id': '9e058c76'
+//     },
+//     sort: {
+//       order: '_score'
+//     },
+//     //offset: 0,
+//     limit: 5,
+//     body: {
+//       query: req.query.addedFood,
+//       timezone: 'US/Eastern'
+//     },
+//     json: true
+//   };
+
+//   request(options, function (error, response, body) {
+//     if (error) {
+//       console.log('here in error');
+//       throw new Error(error);
+//     } else {
+//       res.status(200);
+//       res.send(body.foods);
+//       res.end();
+//     }
+
+//   });
+// })
+
+
 app.get('/foods', function (req, res) {
-  var options = {
+  console.log('reqquery is' , req.query)
+  var options = { 
     method: 'POST',
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
-    headers: {
+    headers: { 
       'content-type': 'application/json',
-      'x-app-key': '599e301928d15020ff16d7dbeef77f6f',
-      'x-app-id': '9e058c76'
+      'x-app-key': xAppKey,
+      'x-app-id': xAppId 
     },
-    sort: {
-      order: '_score'
-    },
-    //offset: 0,
-    limit: 5,
-    body: {
-      query: req.query.userFood,
-      timezone: 'US/Eastern'
-    },
-    json: true
-  };
+
+    body: { 
+      query: req.query.addedFood,
+      timezone: 'US/Eastern' 
+     },
+     json: true 
+   };
 
   request(options, function (error, response, body) {
-    if (error) {
-      console.log('here in error');
+      if (error) {
+        console.log('here in error')
       throw new Error(error);
     } else {
-      res.status(200);
-      res.send(body.foods);
+      res.status(200)
+      console.log('this is the body',body)
+      res.send(body.foods)
       res.end();
+      
     }
-
+  
   });
-})
+});
 
 
 

@@ -81,15 +81,16 @@ class Search extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    axios.get('/foods', {
+    axios.get('/test', {
       params: {
         userFood: this.state.userFoodItemInput
       }
     })
     .then((res) => {
       var tempMatchingFoods = this.state.matchingFoodItems.slice();
+      console.log('here is res data', res.data)
       tempMatchingFoods.push(res.data);
-      this.setState({ matchingFoodItems: tempMatchingFoods });
+      this.setState({ matchingFoodItems: res.data });
       this.postFood(res.data)
     })
     .then(() => {
@@ -120,7 +121,7 @@ class Search extends React.Component {
           </select>
         </form>
 
-        {this.state.matchingFoodItems.map((item, i) => <MatchingItem meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} />)}
+        {this.state.matchingFoodItems.map((item, i) => <MatchingItem meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} state={this.state} />)}
         <br />
       </div>
 
