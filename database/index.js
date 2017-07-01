@@ -86,6 +86,7 @@ module.exports.insertUser = function (username, hash, callback) {
   });
 };
 
+
 module.exports.insertFoodAndDataForUser = function (username, date, foodItem, callback) {
   connection.query(`INSERT INTO user (date, foodItem) VALUES ( '${date}', '${foodItem}' ) WHERE username = '${username}';`, (err, results, fields) => {
     if (err) {
@@ -95,6 +96,13 @@ module.exports.insertFoodAndDataForUser = function (username, date, foodItem, ca
     }
   })
 }
+
+module.exports.insertFood = function (username, food, callback) {
+  connection.query(`select id from user where username = '${username}';`, (err, results, fields)=>{
+    id = results[0]['id'];
+  });
+};
+
 
 
 

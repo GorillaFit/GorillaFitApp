@@ -57,7 +57,6 @@ class Search extends React.Component {
   handleChange(e) {
     console.log('handle change is firing');
     this.setState({ userFoodItemInput: e.target.value });
-    //console.log(this.state.userFoodItemInput)
   }
 
   clearFoods() {
@@ -69,8 +68,17 @@ class Search extends React.Component {
     this.setState({ meal: e.target.value });
   }
 
+  postFood(foodObject){
+    if(this.props.username){
+      axios.post('/foods', {
+        food: foodObject,
+        username: this.props.username,
+        date: Date.now()
+      })
+    }
+  }
+
   handleClick(e) {
-    //console.log(this.state.userFoodItemInput)
     e.preventDefault();
     axios.get('/foods', {
       params: {
@@ -81,7 +89,7 @@ class Search extends React.Component {
       var tempMatchingFoods = this.state.matchingFoodItems.slice();
       tempMatchingFoods.push(res.data);
       this.setState({ matchingFoodItems: tempMatchingFoods });
-      console.log(this.state.matchingFoodItems[0][0]);
+      this.postFood(res.data)
     })
     .then(() => {
       this.setState({
@@ -92,6 +100,7 @@ class Search extends React.Component {
       console.log(err);
     });
   }
+
   render() {
     return (
       <div>
