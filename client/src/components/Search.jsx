@@ -69,17 +69,6 @@ class Search extends React.Component {
     this.setState({ meal: e.target.value });
   }
 
-  postFood(foodObject){
-    console.log('post food is being called! ')
-    if(this.props.username){
-      axios.post('/foods', {
-        food: foodObject,
-        username: this.props.username,
-        date: Date.now()
-      })
-    }
-  }
-
   handleClick(e) {  
     e.preventDefault();
     axios.get('/test', {
@@ -121,7 +110,7 @@ class Search extends React.Component {
           </select>
         </form>
 
-        {this.state.matchingFoodItems.map((item, i) => <MatchingItem meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} state={this.state} />)}
+        {this.state.matchingFoodItems.map((item, i) => <MatchingItem username={this.props.username} meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} state={this.state} />)}
         <br />
       </div>
 

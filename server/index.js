@@ -74,7 +74,8 @@ app.get('/test', function(req, res) {
 })
 })  
 
-app.post('/food', function(req, res) {
+app.post('/foods', function(req, res) {
+  console.log('app post foods is getting called!!!')
   db.insertFoodAndDataForUserAsync(req.query.username, req.query.food.food_name, req.query.date)
   .then((result) => {
     res.send(201);
@@ -97,9 +98,6 @@ app.get('/userfood', function(req, res) {
 })
 
 
-
-
-
 app.post('/signup', (req, res)=>{
   db.isNewUserAsync(req.body.userName)
   .then(()=>{
@@ -109,7 +107,6 @@ app.post('/signup', (req, res)=>{
     return bcrypt.hashAsync(req.body.password, salt);
   })
   .then(hashedPassword=>{
-    console.log('this is a hashed password! ', hashedPassword);
     return db.insertUserAsync(req.body.userName, hashedPassword);
   })
   .then(user=>{
@@ -125,11 +122,6 @@ app.post('/signup', (req, res)=>{
 
 
 
-app.post('/foods', (req, res)=>{
-  console.log('this is the request body! ', req.body);
-  res.status(201)
-  res.end()
-});
 
 passport.use(new LocalStrategy(
   function(username, password, done) {
@@ -166,7 +158,6 @@ app.post('/login', passport.authenticate('local'),
   ((req, res)=>{
     res.status(201);
     res.json(req.user[0].history);
-    console.log('this is the history we get from a user ', req.user[0].history)
     res.end();
   })
 );
@@ -207,7 +198,6 @@ app.post('/login', passport.authenticate('local'),
 
 
 app.get('/foods', function (req, res) {
-  console.log('reqquery is' , req.query)
   var options = { 
     method: 'POST',
     url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
@@ -230,7 +220,6 @@ app.get('/foods', function (req, res) {
       throw new Error(error);
     } else {
       res.status(200)
-      console.log('this is the body',body)
       res.send(body.foods)
       res.end();
       
@@ -270,10 +259,6 @@ app.get('/exercise', function(req, res) {
 
 app.get('/userfoods', function(req, res) {
   console.log('this is the req.url ', req.query)
-});
-
-app.get('/foods', function(req, res) {
-  console.log('this is the request body ', req.body);
 });
 
 const PORT = process.env.PORT || 3000;

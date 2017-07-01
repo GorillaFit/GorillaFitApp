@@ -10,10 +10,18 @@ class MatchingItem extends React.Component {
       listClear: false,
       foodName: null
     }
-    this.addFood = this.addFood.bind(this)
-    
+    this.addFood = this.addFood.bind(this) 
   }
 
+  postFood(foodItem){
+    if(this.props.username){
+      axios.post('/foods', {
+        food: foodItem.data,
+        username: this.props.username,
+        date: Date.now()
+      })
+    }
+  }
 
   onlySetsState (e) {
     e.preventDefault();
@@ -36,6 +44,7 @@ class MatchingItem extends React.Component {
       
     })
     .then( res => {
+      this.postFood(res);
       //this.props.splicer(this.props.iterator)
     })
     .catch((err) => {
