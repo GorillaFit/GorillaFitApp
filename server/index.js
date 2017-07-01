@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+
 var request = require('request');
 var authUtils = require('./authUtils.js');
 const Promise = require('bluebird');
@@ -13,13 +14,122 @@ const db = require('../database/index.js');
 
 Promise.promisifyAll(db);
 
+
 var app = express();
-app.use(express.static(__dirname + '/../client/dist'));
-app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+
+
+app.use(express.static(__dirname + '/../client/dist'));
+app.use(bodyParser.json())
+
+var xAppKey = '76473ef11688b7d9665a46e225cfecad';
+var xAppId = '1a7a76a9';
+
+app.get('/test', function(req, res) {
+  var options = { 
+    method: 'GET',
+    url: 'https://trackapi.nutritionix.com/v2/search/instant',
+    qs: { 
+      query: req.query.userFood
+    },
+    // filters: {
+    //   not: {
+    //    "item_type":2
+    //   }
+    // },
+    sort: {
+      "field":"_score",
+      "order":"desc"
+    },
+    min_score: 0.5,
+    fields: [
+      "item_name",
+      "nf_calories",
+      "serving_qty"
+
+    ],
+    limit: 20,
+    headers: { 
+       'cache-control': 'no-cache',
+       'x-app-key': xAppKey,
+       'x-app-id': xAppId
+   }};
+  request(options, function (error, response, body) {
+    if (error) {
+      console.log('here in error')
+    throw new Error(error);
+  } else {
+    res.status(200)
+    var commonFoods = JSON.parse(body).common.slice(0,5)
+    var branded = JSON.parse(body).branded.slice(0,5)
+    var foodMatches = commonFoods.concat(branded)
+    //console.log(foodMatches)
+    res.send(foodMatches);
+    res.status(200);
+    res.end();
+  }
+})
+})  
+
+app.post('/food', function(req, res) {
+  db.insertFoodAndDataForUserAsync(req.query.username, req.query.food.food_name, req.query.date)
+  .then((result) => {
+    res.send(201);
+    res.send('data inserted successfully')
+    res.end();
+  })
+  .catch((err) => {
+    res.end('there was an error')
+  })
+})
+
+
+app.get('/userfood', function(req, res) {
+  db.getFoodsFromUserOnDateAsync(req.query.username, req.query.date)
+  .then((foodHistory)=> {
+    res.status(200);
+    res.send(foodHistory);
+    res.end();
+  });
+})
+
+
+
+
+app.get('/foods', function (req, res) {
+  console.log('reqquery is' , req.query)
+  var options = { 
+    method: 'POST',
+    url: 'https://trackapi.nutritionix.com/v2/natural/nutrients',
+    headers: { 
+      'content-type': 'application/json',
+      'x-app-key': xAppKey,
+      'x-app-id': xAppId 
+    },
+
+    body: { 
+      query: req.query.addedFood,
+      timezone: 'US/Eastern' 
+     },
+     json: true 
+   };
+
+  request(options, function (error, response, body) {
+    if (error) {
+      console.log('here in error')
+	  throw new Error(error);
+	} else {
+	  res.status(200)
+	  console.log('this is the body',body)
+	  res.send(body.foods)
+	  res.end();
+	  
+	}
+	
+    });
 
 app.post('/signup', (req, res)=>{
   db.isNewUserAsync(req.body.userName)
@@ -82,8 +192,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 app.post('/login', passport.authenticate('local'), 
-  ((req, res)=>{
-    req.flash('info', 'Hi there!');
+  ((req, res)=>{\
     res.status(201);
     res.json(req.user[0].history);
     res.end();
@@ -122,7 +231,10 @@ app.get('/foods', function (req, res) {
     }
 
   });
-});
+
+
+
+
 
 app.get('/exercise', function(req, res) {
   var options = {

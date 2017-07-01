@@ -6,6 +6,7 @@ import Search from './components/Search.jsx';
 import Items from './components/Items.jsx';
 import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
+
 import SignUp from './components/SignUp.jsx';
 import update from 'immutability-helper';
 import SearchExercise from './components/SearchExercise.jsx';
@@ -26,6 +27,7 @@ class App extends React.Component {
         breakfast: [],
         lunch: [],
         dinner: [],
+
         snack: []
       },
       //the below represents the food items that the user has selected
@@ -35,6 +37,7 @@ class App extends React.Component {
       //total calories represents the sum of all calories in selected food items
       //to see in action, set it to a random number
       totalCalories: 0,
+
       fat: 0,
       carbs: 0,
       protein: 0,
@@ -45,10 +48,29 @@ class App extends React.Component {
       ],
       calorieOutput: 560
     };
+
     this.addFood = this.addFood.bind(this);
   }
 
-  addFood(meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+//   addFood (i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+// =======
+//       fat: 0,
+//       carbs: 0,
+//       protein: 0,
+//       //Below are dummy data for exercises and calorie output
+//       exercises: [
+//         'rowing',
+//         'fencing'
+//       ],
+//       calorieOutput: 560
+
+
+//     };
+//     this.addFood = this.addFood.bind(this);
+//   }
+
+  addFood(i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+
     var tempItems = this.state.items;
     for (var key in tempItems) {
       if (key === meal) {
@@ -61,13 +83,16 @@ class App extends React.Component {
     var newProtein = this.state.protein + Math.floor(proteinToAdd);
     this.setState({
       items: tempItems,
+
+
       totalCalories: newTotalCalories,
       fat: newFat,
       carbs: newCarbs,
       protein: newProtein
     });
-    console.log(this.state.items);
+    console.log(this.state.items)
   }
+
 
   addExercise(result) {
     var tempArray = this.state.exercises.slice();
@@ -138,5 +163,13 @@ class App extends React.Component {
   }
 }
 
+
 ReactDOM.render(<App />, document.getElementById('app'));
+
+
+
+//this index will have 3 components 
+//search 
+//items
+//calories
 

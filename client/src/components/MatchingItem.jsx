@@ -1,32 +1,67 @@
 import React from 'react';
 
+import axios from 'axios';
+//import '/MatchingItem.css';
+
 class MatchingItem extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      listClear: false
-    };
-    this.addFood = this.addFood.bind(this);
+      listClear: false,
+      foodName: null
+    }
+    this.addFood = this.addFood.bind(this)
+    //console.log(this)
   }
 
 
-  addFood() {
-    console.log('this is this.props.meal', this.props.item);
-    this.props.addFood(this.props.meal, this.props.item[0].food_name, this.props.item[0].nf_calories, this.props.item[0].nf_total_fat, this.props.item[0].nf_total_carbohydrate, this.props.item[0].nf_protein);
-    this.setState({ listClear: true });
-    //this.render()
+  onlySetsState (e) {
+    e.preventDefault();
+    this.setState({
+      foodName: this.props.item.food_name || this.props.item.brand_name_item_name 
+    }).then(this.addFood())
+  }
+
+  addFood (event) {
+    event.preventDefault();
+    axios.get('/foods', {
+      params: {
+        addedFood: this.props.item.food_name || this.props.item.brand_name_item_name      }
+    })
+    .then((res) => {
+      this.props.addFood(this.props.iterator, this.props.meal,this.props.item.food_name || this.props.item.brand_name_item_name  , res.data[0].nf_calories,res.data[0].nf_total_fat, res.data[0].nf_total_carbohydrate,res.data[0].nf_protein)
+    })
+    .then(() => {
+      this.setState({listClear: true })
+      
+    })
+    .then( res => {
+      this.props.splicer(this.props.iterator)
+    })
+    .catch((err) => {
+      console.log(err)
+      console.log('here in error')
+    })
+
   }
 
 
-  render() {
-    return (
-      <div>
-        <h5 > {!this.state.listClear && (this.props.item[0].food_name + ' (' + this.props.item[0].nf_calories + ' cals)')} </h5>
-        {!this.state.listClear && <button onClick={this.addFood}> Add! </button>}
-      </div>
-    );
+  render()  {
+  	return (
+	  	<div>
+      <form >
+     <br/>
+	    <p> {!this.state.listClear && (this.props.item.food_name || (this.props.item.brand_name_item_name + '(' + this.props.item.nf_calories.toString() + ')'))} </p>
+	    {!this.state.listClear && <button onClick={this.addFood.bind(this)}> Add! </button>}
+      </form>
+	  </div>
+    )
   }
-
+  
 }
+  
+
 
 export default MatchingItem;
+
+
