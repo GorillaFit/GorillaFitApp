@@ -11,7 +11,7 @@ class MatchingItem extends React.Component {
       foodName: null
     }
     this.addFood = this.addFood.bind(this)
-    //console.log(this)
+    
   }
 
 
@@ -36,7 +36,7 @@ class MatchingItem extends React.Component {
       
     })
     .then( res => {
-      this.props.splicer(this.props.iterator)
+      //this.props.splicer(this.props.iterator)
     })
     .catch((err) => {
       console.log(err)
