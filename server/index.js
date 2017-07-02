@@ -70,13 +70,14 @@ app.get('/test', function(req, res) {
 })  
 
 app.post('/foods', function(req, res) {
-  db.insertFoodAndDataForUserAsync(req.body.username, req.body.date, req.body.food[0].food_name)
+  db.insertFoodAndDataForUserAsync(req.body.username, req.body.date, req.body.food[0].food_name, req.body.food[0].nf_calories, req.body.food[0].nf_protein, req.body.food[0].nf_total_fat, req.body.food[0].nf_total_carbohydrate)
   .then((result) => {
-    res.send(201);
+    res.status(201);
     res.send('data inserted successfully')
     res.end();
   })
   .catch((err) => {
+    console.log(err)
     res.end('there was an error')
   })
 })

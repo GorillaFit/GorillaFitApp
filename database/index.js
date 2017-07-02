@@ -99,10 +99,10 @@ module.exports.findIDByUsername = function (username, callback) {
 };
 
 
-module.exports.insertFoodAndDataForUser = function (username, date, foodItem, callback) {
+module.exports.insertFoodAndDataForUser = function (username, date, foodItem, calories, proteins, fat, carbs, callback) {
   module.exports.findIDByUsername(username, (err, results)=>{
     connection.query(
-      `Insert into food (userid, food_name, meal_time) VALUES ("${results[0].id}", "${foodItem}", "snack");`, function (err, results, fields) {
+      `Insert into food (userid, food_name, meal_time, calories, proteins, total_fat, carbohydrates) VALUES ("${results[0].id}", "${foodItem}", "snack", "${calories}", "${proteins}", "${fat}", "${carbs}");`, function (err, results, fields) {
       if (err) {
         callback(err, null);
       } else {
