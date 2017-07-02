@@ -52,6 +52,8 @@ module.exports.findUserByID = function (id, callback) {
   });
 };
 
+
+
 module.exports.getFoodsFromUserOnDate = function (username, date, callback) {
   connection.query(`SELECT * FROM user WHERE username = '${username}' AND date = '${date}';`, function (err, results, fields) {
     if (results.length === 0 ) {
@@ -86,14 +88,27 @@ module.exports.insertUser = function (username, hash, callback) {
   });
 };
 
+module.exports.findIDByUsername = function (username, callback) {
+  connection.query(`SELECT id FROM user WHERE username = '${username}'`, function (err, results, fields) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 
 module.exports.insertFoodAndDataForUser = function (username, date, foodItem, callback) {
-  connection.query(`INSERT INTO user (date, foodItem) VALUES ( '${date}', '${foodItem}' ) WHERE username = '${username}';`, (err, results, fields) => {
-    if (err) {
-      callback(err, null)
-    } else {
-      callback(null, results)
-    }
+  module.exports.findIDByUsername(username, (err, results)=>{
+    connection.query(
+      `Insert into food (userid, food_name, meal_time) VALUES ("${results[0].id}", "${foodItem}", "snack");`, function (err, results, fields) {
+      if (err) {
+        callback(err, null);
+      } else {
+        callback(null, results);
+      }
+    });
   })
 }
 

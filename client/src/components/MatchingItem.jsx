@@ -14,6 +14,7 @@ class MatchingItem extends React.Component {
   }
 
   postFood(foodItem){
+    console.log('this is a food item ', foodItem)
     if(this.props.username){
       axios.post('/foods', {
         food: foodItem.data,
