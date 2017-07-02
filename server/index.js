@@ -89,13 +89,22 @@ app.post('/foods', function(req, res) {
 
 
 app.get('/userfood', function(req, res) {
-  console.log('the user food get is being called!!')
-  db.getFoodsFromUserOnDateAsync(req.query.username, req.query.date)
+  var date = new Date(parseInt(req.query.date));
+  date = JSON.stringify(date).split('T')[0];
+  date = date.split('');
+  date.splice(0, 1);
+  date = date.join('');
+  console.log('this is the username ' , req.query.username);
+  console.log('this is the date ' , date);
+  db.getFoodsFromUserOnDateAsync(req.query.username, date)
   .then((foodHistory)=> {
     res.status(200);
     res.send(foodHistory);
     res.end();
-  });
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
 })
 
 
@@ -218,10 +227,10 @@ app.get('/exercise', function(req, res) {
   });
 });
 
-app.get('/userfoods', function(req, res) {
-  console.log('this is what the request query ', req.query)
-  var username = req.query.username;
-});
+// app.get('/userfoods', function(req, res) {
+//   console.log('this is what the request query ', req.query)
+//   var username = req.query.username;
+// });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, function () {

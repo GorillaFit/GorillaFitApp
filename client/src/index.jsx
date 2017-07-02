@@ -88,18 +88,18 @@ class App extends React.Component {
 
   setUsername(username){
     this.setState({'username': username});
-    axios.get('/userfoods', {
+    axios.get('/userfood', {
       params: {
-        username: JSON.stringify(this.state.username),
+        username: this.state.username,
         date: this.state.date
       }
     })
-    // .then((res) => {
-    //   //do something with the data
-    // })
-    // .catch((err) => {
-    //   console.log(err);
-    // });
+    .then((res) => {
+      console.log('this is the food we get back from set username!! ', res)
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   }
 
@@ -162,9 +162,4 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('app'));
 
 
-
-//this index will have 3 components 
-//search 
-//items
-//calories
 

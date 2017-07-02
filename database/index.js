@@ -56,12 +56,8 @@ module.exports.findUserByID = function (id, callback) {
 
 
 module.exports.getFoodsFromUserOnDate = function (username, date, callback) {
-  connection.query(`SELECT * FROM user WHERE username = '${username}' AND date = '${date}';`, function (err, results, fields) {
-    if (results.length === 0 ) {
-      callback(null, results);
-    } else {
-      callback({err: 'there is no history assoicated with this user!'}, null);
-    }
+  connection.query(`SELECT * FROM food WHERE userid = "7" AND date = "${date}";`, function (err, results, fields) {
+    callback(null, results);
   });
 };
 
