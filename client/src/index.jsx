@@ -6,7 +6,6 @@ import Search from './components/Search.jsx';
 import Items from './components/Items.jsx';
 import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
-
 import SignUp from './components/SignUp.jsx';
 import update from 'immutability-helper';
 import SearchExercise from './components/SearchExercise.jsx';
@@ -27,17 +26,10 @@ class App extends React.Component {
         breakfast: [],
         lunch: [],
         dinner: [],
-
         snack: []
       },
-      //the below represents the food items that the user has selected
-      //to see it in action, paste in 'pizza - 450 calories', 'ice cream - 800 calories'
       selectedFoodItems: [],
-
-      //total calories represents the sum of all calories in selected food items
-      //to see in action, set it to a random number
       totalCalories: 0,
-
       fat: 0,
       carbs: 0,
       protein: 0,
@@ -104,7 +96,7 @@ class App extends React.Component {
   }
 
   bucketFoodHistoryByMeal(res){
-    console.log('this is res data ', res)
+    console.log('this is res data in bucket', res)
     const items = {
         breakfast: [],
         lunch: [],
@@ -121,38 +113,40 @@ class App extends React.Component {
   onBack(e){ 
     e.preventDefault();
     let oneDayBack = new Date().setDate(new Date(this.state.date).getDate()-1);
-    this.setState({date: oneDayBack})
-    axios.get('/userfoods', {
-      params: {
-        username: JSON.stringify(this.state.username),
-        date: JSON.stringify(oneDayBack)
-      }
+    this.setState({date: oneDayBack}, ()=>{
+      axios.get('/userfood', {
+        params: {
+          username: this.state.username,
+          date: oneDayBack
+        }
+      })
+      .then((res) => {
+        this.bucketFoodHistoryByMeal(res)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     })
-    .then((res) => {
-      //do something with the data
-    })
-    .catch((err) => {
-      console.log(err);
-    });
   }
 
   onForward(e){
     console.log('this date ', this.state.date)
     e.preventDefault();
     let oneDayForward = new Date().setDate(new Date(this.state.date).getDate()+1);
-    this.setState({date: oneDayForward})
-    axios.get('/userfoods', {
-      params: {
-        username: JSON.stringify(this.state.username),
-        date: JSON.stringify(oneDayForward)
-      }
-    })
-    .then((res) => {
-      //do something with the data
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+    this.setState({date: oneDayForward}, ()=>{
+      axios.get('/userfood', {
+        params: {
+          username: this.state.username,
+          date: oneDayForward
+        }
+      })
+      .then((res) => {
+        this.bucketFoodHistoryByMeal(res)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    })  
   }
 
   render() {

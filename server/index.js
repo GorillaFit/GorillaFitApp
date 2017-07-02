@@ -86,6 +86,7 @@ app.post('/foods', function(req, res) {
 
 
 app.get('/userfood', function(req, res) {
+  console.log('user food is being called!!')
   var date = new Date(parseInt(req.query.date));
   date = JSON.stringify(date).split('T')[0];
   date = date.split('');
