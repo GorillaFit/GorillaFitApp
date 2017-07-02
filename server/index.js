@@ -64,7 +64,7 @@ app.get('/test', function(req, res) {
   } else {
     res.status(200)
     var commonFoods = JSON.parse(body).common.slice(0,5)
-    var branded = JSON.parse(body).branded.slice(0,5)
+    var branded = JSON.parse(body).branded.slice(0,4)
     var foodMatches = commonFoods.concat(branded)
     //console.log(foodMatches)
     res.send(foodMatches);

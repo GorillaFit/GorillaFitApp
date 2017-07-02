@@ -1,6 +1,10 @@
 import React from 'react';
 import MatchingItem from './MatchingItem.jsx';
 import axios from 'axios';
+import Button from 'react-bootstrap/lib/Button';
+import './Search.css'
+var Columns = require('react-columns');
+
 
 class Search extends React.Component {
   constructor(props) {
@@ -17,7 +21,8 @@ class Search extends React.Component {
       meal: 'snack'
     },
     this.clearFoods = this.clearFoods.bind(this);
-    this.spliceFood = this.spliceFood.bind(this)
+    this.spliceFood = this.spliceFood.bind(this);
+    this.clearResults = this.clearResults.bind(this)
   }
 
   handleChange(e){
@@ -61,7 +66,11 @@ class Search extends React.Component {
   }
 
   clearFoods() {
-    this.setState({ userFoodItemInput: [] });
+    this.setState({ userFoodItemInput: '' });
+  }
+
+  clearResults(){
+    this.setState({ matchingFoodItems: [] })
   }
 
   dropdownChange(e) {
@@ -103,26 +112,29 @@ class Search extends React.Component {
     });
   }
 
+
+
   render() {
     return (
       <div>
+      <h1>What did you eat today?</h1>
         <form>
-          Input Your Food:
-
-          <input id="input" type="text" name="food_item" value={this.state.userFoodItemInput} onChange={this.handleChange.bind(this)} />
+          <input placeholder='Search for a food...'className ='box' id="input" type="text" name="food_item" value={this.state.userFoodItemInput} onChange={this.handleChange.bind(this)} />
           <input id="submit" type="submit" value="Submit" onClick={this.handleClick.bind(this)} />
           <br />
 
-          <select onChange={this.dropdownChange.bind(this)}>
+          <select className ='dropdown' onChange={this.dropdownChange.bind(this)}>
             <option value='snack'>Snack</option>
             <option value='breakfast'>Breakfast</option>
             <option value='lunch'>Lunch</option>
             <option value='dinner'>Dinner</option>
           </select>
         </form>
+       
+        <Columns columns='3' query='min-width: 50px'>{this.state.matchingFoodItems.map((item, i) => <MatchingItem clearResults={this.clearResults} meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} state={this.state} />)}</Columns>
 
-        {this.state.matchingFoodItems.map((item, i) => <MatchingItem meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} state={this.state} />)}
         <br />
+         {this.state.matchingFoodItems.length !==0 && <Button bsStyle='danger' align='right' id='but' bsSize='xsmall' onClick={this.clearResults} >Clear Results</Button>}
       </div>
 
     );

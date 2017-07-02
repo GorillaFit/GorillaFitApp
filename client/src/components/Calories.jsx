@@ -2,8 +2,8 @@ import React from 'react';
 
 const Calories = (props) => (
   <div>
-    <h4> Total Calories </h4>
-    <p>{props.totalCalories}</p>
+    <h3> Total Calories </h3>
+    <p>{Math.floor(props.totalCalories)}</p>
   </div>
 )
 

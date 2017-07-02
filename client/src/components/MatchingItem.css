@@ -1,6 +1,16 @@
-div {
-    width: 300px;
-    border: 25px solid green;
-    padding: 25px;
-    margin: 25px;
+/*.MatchingItem  {
+    width: 100px;
+    border: 5px solid green;
+    padding: 10px;
+    margin: 15px;
+}*/
+
+/*div {
+    background: blue;
+    border-radius: 8px;
+    color: white;
+}*/
+
+#but {
+  text-align: left;
 }
