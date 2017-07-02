@@ -22,6 +22,7 @@ module.exports.selectAll = function (callback) {
 
 module.exports.isNewUser = function (username, callback) {
   connection.query(`SELECT * FROM user WHERE username = '${username}'`, function (err, results, fields) {
+    console.log(err, results, fields)
     if (results.length === 0 ) {
       callback(null, results);
     } else {
@@ -102,7 +103,7 @@ module.exports.findIDByUsername = function (username, callback) {
 module.exports.insertFoodAndDataForUser = function (username, date, foodItem, calories, proteins, fat, carbs, callback) {
   module.exports.findIDByUsername(username, (err, results)=>{
     connection.query(
-      `Insert into food (userid, food_name, meal_time, calories, proteins, total_fat, carbohydrates) VALUES ("${results[0].id}", "${foodItem}", "snack", "${calories}", "${proteins}", "${fat}", "${carbs}");`, function (err, results, fields) {
+      `Insert into food (userid, food_name, meal_time, calories, proteins, total_fat, carbohydrates, date) VALUES ("${results[0].id}", "${foodItem}", "snack", "${calories}", "${proteins}", "${fat}", "${carbs}", "${date}");`, function (err, results, fields) {
       if (err) {
         callback(err, null);
       } else {

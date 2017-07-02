@@ -67,7 +67,15 @@ app.get('/test', function(req, res) {
 })  
 
 app.post('/foods', function(req, res) {
-  db.insertFoodAndDataForUserAsync(req.body.username, req.body.date, req.body.food[0].food_name, req.body.food[0].nf_calories, req.body.food[0].nf_protein, req.body.food[0].nf_total_fat, req.body.food[0].nf_total_carbohydrate)
+  var date = new Date(parseInt(req.body.date));
+  date = JSON.stringify(date).split('T')[0];
+  date = date.split('');
+  date.splice(0, 1);
+  date = date.join('');
+  console.log('this is the data after all ', typeof date);
+  console.log(date)
+  console.log(req.body.username)
+  db.insertFoodAndDataForUserAsync(req.body.username, date, req.body.food[0].food_name, req.body.food[0].nf_calories, req.body.food[0].nf_protein, req.body.food[0].nf_total_fat, req.body.food[0].nf_total_carbohydrate)
   .then((result) => {
     res.status(201);
     res.send('data inserted successfully')
@@ -212,8 +220,6 @@ app.get('/exercise', function(req, res) {
 
 app.get('/userfoods', function(req, res) {
   console.log('this is what the request query ', req.query)
-  var date = new Date(parseInt(req.query.date));
-  date = JSON.stringify(date).split('T')[0];
   var username = req.query.username;
 });
 
