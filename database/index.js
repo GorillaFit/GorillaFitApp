@@ -53,11 +53,11 @@ module.exports.findUserByID = function (id, callback) {
   });
 };
 
-
-
 module.exports.getFoodsFromUserOnDate = function (username, date, callback) {
-  connection.query(`SELECT * FROM food WHERE userid = "7" AND date = "${date}";`, function (err, results, fields) {
-    callback(null, results);
+ module.exports.findIDByUsername(username, (err, results)=>{
+    connection.query(`SELECT * FROM food WHERE userid = "${results[0].id}" AND date = "${date}";`, function (err, results, fields) {
+      callback(null, results);
+    });
   });
 };
 

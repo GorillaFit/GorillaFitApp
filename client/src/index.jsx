@@ -95,7 +95,18 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      console.log('this is the food we get back from set username!! ', res)
+      console.log(res);
+      let foodArray = [];
+      res.data.forEach((el)=>{
+        foodArray.push(el.food_name);
+      })
+      this.setState({items: {
+        breakfast: [],
+        lunch: [],
+        dinner: [],
+        snack: foodArray
+      }})
+
     })
     .catch((err) => {
       console.log(err);
