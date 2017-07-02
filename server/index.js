@@ -1,6 +1,5 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
 var request = require('request');
 var authUtils = require('./authUtils.js');
 const Promise = require('bluebird');
@@ -14,12 +13,10 @@ const db = require('../database/index.js');
 
 Promise.promisifyAll(db);
 
-
 var app = express();
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
 
 
 app.use(express.static(__dirname + '/../client/dist'));
@@ -84,6 +81,7 @@ app.post('/foods', function(req, res) {
 
 
 app.get('/userfood', function(req, res) {
+  console.log('the user food get is being called!!')
   db.getFoodsFromUserOnDateAsync(req.query.username, req.query.date)
   .then((foodHistory)=> {
     res.status(200);
@@ -168,14 +166,12 @@ app.get('/foods', function (req, res) {
       'x-app-key': xAppKey,
       'x-app-id': xAppId 
     },
-
     body: { 
       query: req.query.addedFood,
       timezone: 'US/Eastern' 
      },
      json: true 
    };
-
   request(options, function (error, response, body) {
       if (error) {
         console.log('here in error')
@@ -184,14 +180,9 @@ app.get('/foods', function (req, res) {
       res.status(200)
       res.send(body.foods)
       res.end();
-      
     }
-  
   });
 });
-
-
-
 
 
 app.get('/exercise', function(req, res) {
@@ -220,7 +211,10 @@ app.get('/exercise', function(req, res) {
 });
 
 app.get('/userfoods', function(req, res) {
-  console.log('this is the req.url ', req.query)
+  console.log('this is what the request query ', req.query)
+  var date = new Date(parseInt(req.query.date));
+  date = JSON.stringify(date).split('T')[0];
+  var username = req.query.username;
 });
 
 const PORT = process.env.PORT || 3000;

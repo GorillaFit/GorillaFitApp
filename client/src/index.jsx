@@ -54,7 +54,6 @@ class App extends React.Component {
 
 
   addFood(i, meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
-
     var tempItems = this.state.items;
     for (var key in tempItems) {
       if (key === meal) {
@@ -81,7 +80,6 @@ class App extends React.Component {
   addExercise(result) {
     var tempArray = this.state.exercises.slice();
     tempArray.push(result.exercises[0].name);
-
     this.setState({
       exercises: tempArray,
       calorieOutput: this.state.calorieOutput + result.exercises[0].nf_calories
@@ -90,6 +88,19 @@ class App extends React.Component {
 
   setUsername(username){
     this.setState({'username': username});
+    axios.get('/userfoods', {
+      params: {
+        username: JSON.stringify(this.state.username),
+        date: this.state.date
+      }
+    })
+    // .then((res) => {
+    //   //do something with the data
+    // })
+    // .catch((err) => {
+    //   console.log(err);
+    // });
+
   }
 
   onBack(e){ 

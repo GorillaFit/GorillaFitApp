@@ -71,6 +71,7 @@ CREATE TABLE `food` (
   `potassium` DECIMAL(10,2) NULL DEFAULT NULL,
   `photo` VARCHAR(250) NULL DEFAULT NULL,
   `meal_time` VARCHAR(250) NOT NULL,
+  `date` VARCHAR(250) NOT NULL,
   PRIMARY KEY (`id`)
 );
 
