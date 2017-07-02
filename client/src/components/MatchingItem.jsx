@@ -19,7 +19,8 @@ class MatchingItem extends React.Component {
       axios.post('/foods', {
         food: foodItem.data,
         username: this.props.username,
-        date: Date.now()
+        date: Date.now(),
+        meal: this.props.meal
       })
       .catch((err)=>{
         console.log('this is an err ', err);

@@ -72,10 +72,7 @@ app.post('/foods', function(req, res) {
   date = date.split('');
   date.splice(0, 1);
   date = date.join('');
-  console.log('this is the data after all ', typeof date);
-  console.log(date)
-  console.log(req.body.username)
-  db.insertFoodAndDataForUserAsync(req.body.username, date, req.body.food[0].food_name, req.body.food[0].nf_calories, req.body.food[0].nf_protein, req.body.food[0].nf_total_fat, req.body.food[0].nf_total_carbohydrate)
+  db.insertFoodAndDataForUserAsync(req.body.username, date, req.body.food[0].food_name, req.body.food[0].nf_calories, req.body.food[0].nf_protein, req.body.food[0].nf_total_fat, req.body.food[0].nf_total_carbohydrate, req.body.meal)
   .then((result) => {
     res.status(201);
     res.send('data inserted successfully')

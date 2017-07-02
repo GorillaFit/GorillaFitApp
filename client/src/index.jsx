@@ -95,23 +95,27 @@ class App extends React.Component {
       }
     })
     .then((res) => {
-      console.log(res);
-      let foodArray = [];
-      res.data.forEach((el)=>{
-        foodArray.push(el.food_name);
-      })
-      this.setState({items: {
-        breakfast: [],
-        lunch: [],
-        dinner: [],
-        snack: foodArray
-      }})
-
+      this.bucketFoodHistoryByMeal(res);
     })
     .catch((err) => {
       console.log(err);
     });
 
+  }
+
+  bucketFoodHistoryByMeal(res){
+    console.log('this is res data ', res)
+    const items = {
+        breakfast: [],
+        lunch: [],
+        dinner: [],
+        snack: []
+      }
+    res.data.forEach((el)=>{  
+      let mealtime = el.meal_time;
+      items[mealtime].push(el.food_name);
+    })
+    this.setState({items: items})
   }
 
   onBack(e){ 
