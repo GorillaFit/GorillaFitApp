@@ -1,6 +1,10 @@
 var path = require('path');
 var SRC_DIR = path.join(__dirname, '/client/src');
 var DIST_DIR = path.join(__dirname, '/client/dist');
+//var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+// in the webpack config
+
 
 module.exports = {
   entry: `${SRC_DIR}/index.jsx`,
@@ -8,6 +12,7 @@ module.exports = {
     filename: 'bundle.js',
     path: DIST_DIR
   },
+
   module: {
     loaders: [
       {
@@ -19,10 +24,8 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
-        include: SRC_DIR,
-        loader: 'style-loader!css-loader'
-      }
+        test:  /\.css$/, loader: "style-loader!css-loader" 
+      },
     ]
   }
 };

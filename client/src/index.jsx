@@ -6,6 +6,9 @@ import Search from './components/Search.jsx';
 import Items from './components/Items.jsx';
 import Calories from './components/Calories.jsx';
 import Nutrients from './components/Nutrients.jsx';
+import './index.css'
+var Columns = require('react-columns');
+
 import SignUp from './components/SignUp.jsx';
 import update from 'immutability-helper';
 import SearchExercise from './components/SearchExercise.jsx';
@@ -151,24 +154,28 @@ class App extends React.Component {
 
   render() {
     return (
-    <div>
-      {this.state.username ? <ForwardButton onForward={this.onForward.bind(this)}/> : ''}
-      {this.state.username ? <BackButton onBack={this.onBack.bind(this)}/> : ''}
-      {this.state.username ? '' : <SignUp setUsername={this.setUsername.bind(this)}/>}
-      <Search addFood={this.addFood} username={this.state.username}/>
-      <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
-      <Calories totalCalories={this.state.totalCalories} />
-      <Nutrients fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein} />
-      <hr/>
-      <SearchExercise addExercise={this.addExercise.bind(this)}/>
-      <Exercises exercises={this.state.exercises}/>
-      <CalorieOutput calorieOutput={this.state.calorieOutput}/>
-    </div >);
+    
+      <div>
+        {this.state.username ? <ForwardButton onForward={this.onForward.bind(this)}/> : ''}
+        {this.state.username ? <BackButton onBack={this.onBack.bind(this)}/> : ''}
+        {this.state.username ? '' : <SignUp setUsername={this.setUsername.bind(this)}/>}
+          <Search  addFood={this.addFood} username={this.state.username}/>
+          
+    
+          <div id = 'left'>
+            <Items breakfast={this.state.items.breakfast} lunch={this.state.items.lunch} dinner={this.state.items.dinner} snack={this.state.items.snack} />
+
+          </div>
+          <div id = 'right'>
+            <Calories  totalCalories={this.state.totalCalories} /><br/>
+            <Nutrients  fat={this.state.fat} carbs={this.state.carbs} protein={this.state.protein} />
+          </div>
+      </div>
+    
+
+   );
   }
 }
 
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
-
