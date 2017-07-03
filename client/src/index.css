@@ -1,0 +1,20 @@
+#left {
+  float: left;
+  width: 50%;
+}
+
+#right {
+   border-left: 2px dotted black;
+  float: right;
+  width: 50%;
+}
+
+/*body {
+    margin: 0;
+    background: #2a2a2a;
+    font: 13px/20px Helvetica, Arial, sans-serif;
+    color: #414141;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: none;
+    min-width: 1000px;
+}*/

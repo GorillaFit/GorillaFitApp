@@ -1,0 +1,29 @@
+input[type=text] {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #42a1f4;
+    border: none;
+    color: white;
+    padding: 14px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+   }
+
+.dropdown {
+   background: url(http://i62.tinypic.com/15xvbd5.png) no-repeat 96% 1;
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+}
+
+#but {
+  float: right;
+  margin:  10px 10px;
+
+}

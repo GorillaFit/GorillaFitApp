@@ -8,7 +8,7 @@ import Dinner from './Dinner.jsx';
 
 const Items = (props) => (
   <div>
-    <h4>What You've Eaten Today: </h4>
+    <h2>What You've Eaten Today: </h2>
     {props.breakfast.length !== 0 && <Breakfast breakfast={props.breakfast} />}
     {props.lunch.length !== 0 && <Lunch lunch={props.lunch} />}
     {props.dinner.length !== 0 && <Dinner dinner={props.dinner} />}
