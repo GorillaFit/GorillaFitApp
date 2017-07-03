@@ -134,11 +134,12 @@ class Search extends React.Component {
           </select>
         </form>
        
-        <Columns query='min-width: 50px'>{this.state.matchingFoodItems.map((item, i) => <MatchingItem username={this.props.username} clearResults={this.clearResults} meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} state={this.state} />)}</Columns>
+        <Columns columns='3' query='min-width: 50px'>{this.state.matchingFoodItems.map((item, i) => <MatchingItem username={this.props.username} clearResults={this.clearResults} meal={this.state.meal} addFood={this.props.addFood} clearMatchList={this.clearFoods} item={item} key={i} state={this.state} />)}</Columns>
 
 
         <br />
-         {this.state.matchingFoodItems.length !==0 && <Button bsStyle='danger' id='but' bsSize='xsmall' onClick={this.clearResults} >Clear Results</Button>}
+         {this.state.matchingFoodItems.length !==0 && <Button bsStyle='danger' align='right' id='but' bsSize='xsmall' onClick={this.clearResults} >Clear Results</Button>}
+
       </div>
 
     );
