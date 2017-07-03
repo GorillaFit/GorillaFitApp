@@ -2,10 +2,10 @@ var mysql = require('mysql');
 const Promise = require('bluebird');
 
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'gorilla_fit'
+  host: 'us-cdbr-iron-east-03.cleardb.net',
+  user: 'b5ddec3257ffb1',
+  password: 'd1ca662c',
+  database: 'heroku_0b190ccc72dbab6'
 });
 
 Promise.promisifyAll(connection);
