@@ -61,14 +61,26 @@ class App extends React.Component {
     var newProtein = this.state.protein + Math.floor(proteinToAdd);
     this.setState({
       items: tempItems,
-
-
       totalCalories: newTotalCalories,
       fat: newFat,
       carbs: newCarbs,
       protein: newProtein
     });
     console.log(this.state.items)
+  }
+
+
+  addHistoricalFood(meal, foodToAdd, caloriesToAdd, fatToAdd, carbsToAdd, proteinToAdd) {
+    var newTotalCalories = this.state.totalCalories + caloriesToAdd;
+    var newFat = this.state.fat + Math.floor(fatToAdd);
+    var newCarbs = this.state.carbs + Math.floor(carbsToAdd);
+    var newProtein = this.state.protein + Math.floor(proteinToAdd);
+    this.setState({
+      totalCalories: newTotalCalories,
+      fat: newFat,
+      carbs: newCarbs,
+      protein: newProtein
+    });
   }
 
 
@@ -99,7 +111,12 @@ class App extends React.Component {
   }
 
   bucketFoodHistoryByMeal(res){
-    console.log('this is res data in bucket', res)
+    this.setState({
+      totalCalories: 0,
+      fat: 0,
+      carbs: 0,
+      protein: 0
+    })
     const items = {
         breakfast: [],
         lunch: [],
@@ -109,6 +126,7 @@ class App extends React.Component {
     res.data.forEach((el)=>{  
       let mealtime = el.meal_time;
       items[mealtime].push(el.food_name);
+      this.addHistoricalFood(el.meal_time, el.foodToAdd, el.calories, el.total_fat, el.carbohydrates, el.proteins)
     })
     this.setState({items: items})
   }
@@ -133,7 +151,6 @@ class App extends React.Component {
   }
 
   onForward(e){
-    console.log('this date ', this.state.date)
     e.preventDefault();
     let oneDayForward = new Date().setDate(new Date(this.state.date).getDate()+1);
     this.setState({date: oneDayForward}, ()=>{
@@ -148,7 +165,7 @@ class App extends React.Component {
       })
       .catch((err) => {
         console.log(err);
-      });
+      }); 
     })  
   }
 

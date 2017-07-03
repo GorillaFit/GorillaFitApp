@@ -8,7 +8,7 @@
     "react-dev": "webpack -d --watch",
     "server-dev": "nodemon server/index.js",
     "test": "jest",
-    "build": "webpack -p",
+    "build": "webpack -d",
     "heroku-postbuild": "npm run build",
     "start": "node server/index.js"
   },
