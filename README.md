@@ -1,6 +1,6 @@
-# Project Name
+# Gorilla Fit
 
-> Pithy project description
+> On the go Calorie Counter  
 
 ## Team
 
