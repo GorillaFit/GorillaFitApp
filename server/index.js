@@ -58,7 +58,6 @@ app.get('/test', function(req, res) {
     var commonFoods = JSON.parse(body).common.slice(0,5)
     var branded = JSON.parse(body).branded.slice(0,4)
     var foodMatches = commonFoods.concat(branded)
-    //console.log(foodMatches)
     res.send(foodMatches);
     res.status(200);
     res.end();
@@ -86,14 +85,11 @@ app.post('/foods', function(req, res) {
 
 
 app.get('/userfood', function(req, res) {
-  console.log('user food is being called!!')
   var date = new Date(parseInt(req.query.date));
   date = JSON.stringify(date).split('T')[0];
   date = date.split('');
   date.splice(0, 1);
   date = date.join('');
-  console.log('this is the username ' , req.query.username);
-  console.log('this is the date ' , date);
   db.getFoodsFromUserOnDateAsync(req.query.username, date)
   .then((foodHistory)=> {
     res.status(200);
@@ -165,7 +161,6 @@ app.post('/login', passport.authenticate('local'),
   ((req, res)=>{
     res.status(201);
     res.json(req.user[0].history);
-    console.log('this is the history we get from a user ', req.user[0].history)
     res.end();
   })
 );
